@@ -496,7 +496,7 @@ video {
 
 .video-preview.video-visible .projects__img {
   opacity: 0;
-  transition: opacity 1.3s ease-in-out;
+  transition: transform 0.4s, opacity 1.3s ease-in-out;
 }
 
 .projects__name {
