@@ -484,7 +484,6 @@ video {
 
 .projects__video {
   position: absolute;
-  object-fit: cover;
   width: 420px;
   transition: transform 0.4s, opacity 1.3s ease-in-out;
   z-index: 1; /* Vídeo fica atrás */
