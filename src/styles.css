@@ -307,7 +307,7 @@ video {
   text-align: justify;
   font: var(--body-font);
   font-size: 15px;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .info .button {
