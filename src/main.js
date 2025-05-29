@@ -1,7 +1,7 @@
 import "./styles.css";
 import ScrollReveal from "scrollreveal";
 import emailjs from "@emailjs/browser";
-emailjs.init("Kl5Nomd_tQQiy0FkV");
+emailjs.init("nIWEWKf0WFuwX1tyU");
 
 /*=============== EMAIL JS ===============*/
 const contactForm = document.getElementById("contact-form"),
@@ -20,7 +20,7 @@ const sendEmail = (e) => {
 
   // serviceID - templateID - #form - publicKey
   emailjs
-    .sendForm("service_61d10nv", "template_hcaqrvt", "#contact-form")
+    .sendForm("service_dospcsd", "template_hcaqrvt", "#contact-form")
 
     .then(
       () => {
