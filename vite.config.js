@@ -4,7 +4,7 @@ import purgecss from "vite-plugin-purgecss";
 export default defineConfig({
   root: "src", // Seu index.html está na pasta src
   publicDir: "../public", // Pasta pública na raiz do projeto
-  base: "/harry-portfolio/", // Para Netlify, use barra ou remova essa linha (padrão já é "/")
+  base: "", // Para Netlify, use barra ou remova essa linha (padrão já é "/")
   build: {
     outDir: "../dist", // Saída na raiz
     emptyOutDir: true,
