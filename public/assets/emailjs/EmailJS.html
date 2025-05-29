@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons CDN (Remix Icons) -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #0b0b0b, #1a1a1a);
+        font-family: "Poppins", sans-serif;
+        color: #ffffff;
+        padding: 20px;
+        margin: 0;
+      }
+
+      .email-container {
+        max-width: 600px;
+        margin: auto;
+        background: #181818;
+        border-radius: 16px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      .header {
+        padding: 1rem;
+        background: linear-gradient(
+          90deg,
+          hsl(358, 80%, 49%),
+          hsl(358, 76%, 45%)
+        );
+        text-align: center;
+      }
+
+      .header h1 {
+        font-family: "Poppins", serif;
+        font-size: 1.85rem;
+        margin: 0;
+      }
+
+      .details {
+        padding: 1rem 20px;
+        font-size: 0.9rem;
+        color: #bbbbbb;
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+      }
+
+      /* Wrapper for icon, user info and message */
+      .message-wrapper {
+        position: relative;
+      }
+
+      /* Silhueta de usuário */
+      .message-icon-wrapper {
+        position: relative;
+        top: 0;
+        background: linear-gradient(
+          90deg,
+          hsl(358, 80%, 49%),
+          hsl(358, 76%, 45%)
+        );
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-self: center;
+        justify-self: center;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        z-index: 2;
+      }
+
+      .message-icon-wrapper i {
+        font-size: 1.8rem;
+        color: #ffffff;
+      }
+
+      /* Nome e email centralizados abaixo da silhueta */
+      .message-user-info {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 1;
+        margin-block: 1rem;
+        border-bottom: 1px solid #333;
+      }
+
+      .message-user-info .user-name,
+      .message-user-info .user-email {
+        margin: 2px 0;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+      .message-user-info .user-email {
+        margin: 2px 0 20px;
+      }
+      .message {
+        padding: 20px;
+        font-size: 1rem;
+        line-height: 1.5;
+        background: #222;
+        border-radius: 8px;
+        margin: 0 20px 20px;
+        transition: background-color 0.3s ease;
+      }
+
+      .message:hover {
+        background: #292929;
+      }
+
+      .footer {
+        padding: 15px;
+        font-size: 0.8rem;
+        color: #999;
+        text-align: center;
+        background: #141414;
+      }
+
+      @media (max-width: 600px) {
+        .header h1,
+        .message,
+        .details {
+          padding: 10px;
+          text-align: center;
+        }
+
+        .details {
+          margin-block: 0.5rem;
+          flex-direction: column;
+        }
+
+        .message-icon-wrapper {
+          width: 50px;
+          height: 50px;
+          top: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-container">
+      <div class="header">
+        <h1>NOVA MENSAGEM</h1>
+      </div>
+
+      <div class="details">
+        <span><strong>Data/Hora:</strong> {{time}}</span>
+      </div>
+
+      <div class="message-wrapper">
+        <div class="message-icon-wrapper">
+          <i class="ri-user-line"></i>
+        </div>
+        <div class="message-user-info">
+          <p class="user-name">{{user_name}}</p>
+          <p class="user-email">{{user_email}}</p>
+        </div>
+        <div class="message">{{message}}</div>
+      </div>
+
+      <div class="footer">
+        Portfólio desenvolvido por Harry Schlorke – Todos os direitos
+        reservados.
+      </div>
+    </div>
+  </body>
+</html>
