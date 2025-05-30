@@ -20,7 +20,12 @@ const sendEmail = (e) => {
 
   // serviceID - templateID - #form - publicKey
   emailjs
-    .sendForm("service_dospcsd", "template_hcaqrvt", "#contact-form")
+    .sendForm(
+      "service_dospcsd",
+      "template_hcaqrvt",
+      "#contact-form",
+      "nIWEWKf0WFuwX1tyU"
+    )
 
     .then(
       () => {
