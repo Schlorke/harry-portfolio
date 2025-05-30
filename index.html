@@ -6,7 +6,7 @@
 
     <!-- Cor da barra de status e PWA -->
     <meta name="theme-color" content="hsl(358, 100%, 1%)" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
@@ -88,6 +88,24 @@
     </noscript>
 
     <!-- CSS Principal -->
+
+    <!--==================== SECURITY: CONTENT SECURITY POLICY ====================
+     Essa política de segurança protege contra injeções de código malicioso (XSS),
+     restringindo os domínios externos permitidos para scripts, estilos, fontes, imagens
+     e conexões. Reforce a proteção do navegador e evite comportamentos inseguros.
+===============================================================================-->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.emailjs.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
+    font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net;
+    img-src 'self' data: https:;
+    connect-src 'self' https://cdn.emailjs.com https://www.google-analytics.com;
+    frame-src https://www.google.com https://www.youtube.com;
+"
+    />
 
     <!-- SEO e Open Graph -->
     <title>Harry Schlorke - Desenvolvedor Full-Stack em Porto Alegre</title>
@@ -239,7 +257,7 @@
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3457.6449128455434!2d-51.1843939!3d-30.0556926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95197802e385ef0f%3A0xa321dc30c5624125!2sR.%20Cervantes%2C%2039%20-%20Jardim%20Bot%C3%A2nico%2C%20Porto%20Alegre%20-%20RS%2C%2090690-020!5e0!3m2!1spt-BR!2sbr!4v1713627371993!5m2!1spt-BR!2sbr"
                 allowfullscreen=""
                 loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
+                referrerpolicy="strict-origin"
                 title="Mapa mostrando a localização de Harry Schlorke em Porto Alegre, RS"
               ></iframe>
             </div>
@@ -269,6 +287,7 @@
               <a
                 href="https://www.linkedin.com/in/harry-schlorke/"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="about__link"
                 aria-label="Abrir LinkedIn de Harry Schlorke"
               >
@@ -278,6 +297,7 @@
               <a
                 href="https://github.com/Schlorke"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="about__link"
                 aria-label="Abrir GitHub de Harry Schlorke"
               >
@@ -287,6 +307,7 @@
               <a
                 href="https://www.behance.net/harryschlorke"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="about__link"
                 aria-label="Abrir Behance de Harry Schlorke"
               >
@@ -405,6 +426,7 @@
             <a
               href="https://diprimioadvocacia.com/"
               target="_blank"
+              rel="noopener noreferrer"
               class="projects__image video-preview"
             >
               <img
@@ -462,6 +484,7 @@
               <a
                 href="https://diprimioadvocacia.com/"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="projects__button"
               >
                 <i class="ri-link"></i>
@@ -474,6 +497,7 @@
             <a
               href="https://henryventura.com.br/"
               target="_blank"
+              rel="noopener noreferrer"
               class="projects__image video-preview"
             >
               <img
@@ -544,6 +568,7 @@
               <a
                 href="https://henryventura.com.br"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="projects__button"
               >
                 <i class="ri-link"></i>
@@ -556,6 +581,7 @@
             <a
               href="https://schlorke.github.io/EasyRent/index.html"
               target="_blank"
+              rel="noopener noreferrer"
               class="projects__image video-preview"
             >
               <img
@@ -612,6 +638,7 @@
               <a
                 href="https://schlorke.github.io/EasyRent/index.html"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="projects__button"
               >
                 <i class="ri-link"></i>
@@ -624,6 +651,7 @@
             <a
               href="https://monapart.com.br"
               target="_blank"
+              rel="noopener noreferrer"
               class="projects__image video-preview"
             >
               <img
@@ -701,6 +729,7 @@
               <a
                 href="https://monapart.com.br"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="projects__button"
               >
                 <i class="ri-link"></i>
@@ -713,6 +742,7 @@
             <a
               href="https://schlorke.github.io/CRM-Dashboard/"
               target="_blank"
+              rel="noopener noreferrer"
               class="projects__image video-preview"
             >
               <img
@@ -770,6 +800,7 @@
               <a
                 href="https://schlorke.github.io/CRM-Dashboard"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="projects__button"
               >
                 <i class="ri-link"></i>
@@ -968,6 +999,7 @@
           <a
             href="https://wa.me/5551998158015?text=Olá! Estou entrando em contato pelo seu portfólio."
             target="_blank"
+            rel="noopener noreferrer"
             class="footer__social-link"
             aria-label="Abrir WhatsApp de Harry Schlorke"
           >
@@ -977,6 +1009,7 @@
           <a
             href="https://www.instagram.com/harryschlorke?igsh=NjNuY3JjNDhqam1v&utm_source=qr"
             target="_blank"
+            rel="noopener noreferrer"
             class="footer__social-link"
             aria-label="Abrir Instagram de Harry Schlorke"
           >
@@ -986,6 +1019,7 @@
           <a
             href="https://github.com/Schlorke"
             target="_blank"
+            rel="noopener noreferrer"
             class="footer__social-link"
             aria-label="Abrir GitHub de Harry Schlorke"
           >
@@ -1021,6 +1055,7 @@
           <a
             href="https://github.com/Schlorke"
             target="_blank"
+            rel="noopener noreferrer"
             class="footer__social-link"
             aria-label="Abrir GitHub de Harry Schlorke"
           >
@@ -1035,6 +1070,7 @@
           <a
             href="https://www.instagram.com/harryschlorke?igsh=NjNuY3JjNDhqam1v&utm_source=qr"
             target="_blank"
+            rel="noopener noreferrer"
             class="footer__social-link"
             aria-label="Abrir Instagram de Harry Schlorke"
           >
@@ -1049,6 +1085,7 @@
           <a
             href="https://wa.me/5551998158015?text=Olá! Estou entrando em contato pelo seu portfólio."
             target="_blank"
+            rel="noopener noreferrer"
             class="footer__social-link"
             aria-label="Abrir WhatsApp de Harry Schlorke"
           >
