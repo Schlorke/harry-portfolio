@@ -75,7 +75,7 @@ harry-portfolio/
 Se quiser conversar sobre oportunidades, colaborações ou projetos, entre em contato:
 
 - 🌐 [harryschlorke.com](https://harryschlorke.com)
-- 📧 harry.8314900@edu.univali.br
+- 📧 ti@harryschlorke.com
 - 💼 [LinkedIn](https://www.linkedin.com/in/harry-schlorke/)
 - 💻 [GitHub](https://github.com/Schlorke)
 - 📲 [WhatsApp](https://wa.me/5551998158015)
