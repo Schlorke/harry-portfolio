@@ -12,7 +12,11 @@
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.1",
     "gh-pages": "^6.3.0",
+    "prettier": "^3.5.3",
     "vite": "^6.3.5",
     "vite-plugin-purgecss": "^0.2.13"
   },
