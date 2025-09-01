@@ -489,10 +489,7 @@ video {
 .projects__video {
   position: absolute;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
-  max-width: 443px;
-  max-height: 290.72px;
+  width: 420px;
   transition:
     transform 0.4s,
     opacity 1.3s ease-in-out;
@@ -966,10 +963,6 @@ video {
     max-width: 332px;
     max-height: 217.88px;
   }
-  .projects__video {
-    max-width: 332px;
-    max-height: 217.88px;
-  }
 }
 
 @media screen and (min-width: 768px) {
@@ -1020,10 +1013,6 @@ video {
     column-gap: 4.5rem;
   }
   .projects__img {
-    max-width: 302px;
-    max-height: 198.19px;
-  }
-  .projects__video {
     max-width: 302px;
     max-height: 198.19px;
   }
@@ -1116,10 +1105,6 @@ video {
     padding-bottom: 2rem;
   }
   .projects__img {
-    max-width: 320px;
-    max-height: 210px;
-  }
-  .projects__video {
     max-width: 320px;
     max-height: 210px;
   }
