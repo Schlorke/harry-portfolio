@@ -47,7 +47,7 @@ Este portfólio foi desenvolvido com o objetivo de apresentar minhas habilidades
 
 <div align="center">
 
-![Portfolio Banner](public/assets/img/Harry-Banner.png)
+![Portfolio Preview](public/assets/img/Home-Harry.webp)
 
 </div>
 
@@ -387,7 +387,7 @@ copies or substantial portions of the Software.
 - 📧 **Email**: [harryschlorke@gmail.com](mailto:harryschlorke@gmail.com)
 - 💼 **LinkedIn**: [linkedin.com/in/harryschlorke](https://linkedin.com/in/harryschlorke)
 - 🐱 **GitHub**: [@Schlorke](https://github.com/Schlorke)
-- 📱 **WhatsApp**: [+55 51 99815-8015](https://wa.me/5551998158015)
+- 📱 **WhatsApp**: [+55 51 99815-8015](https://wa.me/5551998158015?text=Olá!%20Vim%20através%20do%20seu%20portfólio%20no%20GitHub.)
 
 ---
 
