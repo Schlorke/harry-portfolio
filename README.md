@@ -10,20 +10,21 @@
 
 ## 📋 Índice
 
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Demonstração](#demonstração)
-- [Tecnologias](#tecnologias)
-- [Funcionalidades](#funcionalidades)
-- [Instalação](#instalação)
-- [Uso](#uso)
-- [Scripts Disponíveis](#scripts-disponíveis)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Configuração](#configuração)
-- [Deploy](#deploy)
-- [Contribuindo](#contribuindo)
-- [Suporte](#suporte)
-- [Licença](#licença)
-- [Contato](#contato)
+- [🎯 Sobre o Projeto](#-sobre-o-projeto)
+- [🚀 Demonstração](#-demonstração)
+- [🛠️ Tecnologias](#️-tecnologias)
+- [✨ Funcionalidades](#-funcionalidades)
+- [🚀 Instalação](#-instalação)
+- [💻 Uso](#-uso)
+- [📜 Scripts Disponíveis](#-scripts-disponíveis)
+- [📁 Estrutura do Projeto](#-estrutura-do-projeto)
+- [⚙️ Configuração](#️-configuração)
+- [🚀 Deploy](#-deploy)
+- [🤝 Contribuindo](#-contribuindo)
+- [📊 Performance](#-performance)
+- [🛡️ Suporte](#️-suporte)
+- [📄 Licença](#-licença)
+- [📞 Contato](#-contato)
 
 ## 🎯 Sobre o Projeto
 
