@@ -47,7 +47,7 @@ Este portfólio foi desenvolvido com o objetivo de apresentar minhas habilidades
 
 <div align="center">
 
-![Portfolio Preview](public/assets/img/Home-Harry.webp)
+![Portfolio Preview](public/assets/img/harry-meta.jpg)
 
 </div>
 
