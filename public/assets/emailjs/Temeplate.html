@@ -1,0 +1,137 @@
+<!-- FUNDO PRETO GRADIENTE TOTAL -->
+<div
+  style="
+    box-sizing: border-box;
+    margin: 0;
+    padding: 24px;
+    background: linear-gradient(135deg, #0b0b0b, #1a1a1a);
+  "
+>
+  <!-- CONTEÚDO DO EMAIL -->
+  <div
+    style="
+      max-width: 600px;
+      margin: auto;
+      background: #181818;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+    "
+  >
+    <!-- Cabeçalho -->
+    <div
+      style="
+        padding: 1rem;
+        background: linear-gradient(
+          90deg,
+          hsl(358, 80%, 49%),
+          hsl(358, 76%, 45%)
+        );
+        text-align: center;
+      "
+    >
+      <h1 style="margin: 0; font-size: 1.85rem; font-weight: 600">
+        NOVA MENSAGEM
+      </h1>
+    </div>
+
+    <!-- Data/Hora -->
+    <div
+      style="
+        padding: 1rem 20px;
+        font-size: 0.9rem;
+        color: #bbbbbb;
+        display: flex;
+        gap: 10px;
+      "
+    >
+      <strong style="color: #ffffff">Data/Hora:</strong> {{time}}
+    </div>
+
+    <!-- Ícone e Usuário (centralização garantida) -->
+    <div style="text-align: center; margin-top: 1.5rem">
+      <div
+        style="
+          width: 60px;
+          height: 60px;
+          background: linear-gradient(
+            90deg,
+            hsl(358, 80%, 49%),
+            hsl(358, 76%, 45%)
+          );
+          border-radius: 50%;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          display: inline-block;
+          overflow: hidden;
+        "
+      >
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/456/456212.png"
+          alt="ícone de usuário"
+          width="30"
+          height="30"
+          style="display: block; margin: 1rem; border-radius: 50%"
+        />
+      </div>
+    </div>
+
+    <!-- Nome e Email centralizados -->
+    <table align="center" role="presentation" style="margin: 0 auto 1.25rem">
+      <tr>
+        <td align="center" style="text-align: center">
+          <p
+            style="
+              margin: 2px 0;
+              font-size: 1.05rem;
+              font-weight: 700;
+              color: #ffffff;
+            "
+          >
+            {{user_name}}
+          </p>
+          <p
+            style="
+              margin: 2px 0 20px;
+              font-size: 0.95rem;
+              font-weight: 500;
+              color: #ffffff;
+            "
+          >
+            {{user_email}}
+          </p>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Mensagem -->
+    <div
+      style="
+        padding: 20px;
+        font-size: 1rem;
+        line-height: 1.5;
+        background: #222;
+        border-radius: 8px;
+        margin: 1rem 20px 20px;
+        color: #ffffff;
+      "
+    >
+      {{message}}
+    </div>
+
+    <!-- Rodapé -->
+    <div
+      style="
+        padding: 15px;
+        font-size: 0.8rem;
+        color: #999;
+        text-align: center;
+        background: #141414;
+        border-radius: 0 0 16px 16px;
+      "
+    >
+      Portfólio desenvolvido por Harry Schlorke – Todos os direitos reservados.
+    </div>
+  </div>
+</div>
