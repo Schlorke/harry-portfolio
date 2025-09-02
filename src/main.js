@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (supportsThemeColor) {
     const meta = document.createElement('meta')
     meta.name = 'theme-color'
-    meta.content = '#ff0303'
+    meta.content = 'hsl(358, 100%, 1%)'
     document.head.appendChild(meta)
   }
 
