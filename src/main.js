@@ -1,20 +1,70 @@
-import './styles.css'
-import ScrollReveal from 'scrollreveal'
 import emailjs from '@emailjs/browser'
+import ScrollReveal from 'scrollreveal'
+import './styles.css'
 emailjs.init('nIWEWKf0WFuwX1tyU')
+
+/*===============================================
+  HEADER ANIMATION - ANIMAÇÃO DE ENTRADA
+  ===============================================
+
+  Este script controla a animação de entrada do header.
+
+  Funcionalidade:
+  - Após 1500ms, o header reduz de tamanho
+  - Após 1580ms adicionais, o menu de navegação aparece
+
+  Dependência: jQuery
+*/
+
+$(document).ready(function () {
+  // Atraso para a animação do header
+  setTimeout(function () {
+    $('header').addClass('animate_header')
+
+    // Atraso adicional para a animação do nav
+    setTimeout(function () {
+      $('header nav ul').addClass('animate_nav') // Ativa a animação no nav
+    }, 1580) // Atraso de 1580ms para o nav após o header
+  }, 1500) // Tempo de 1500ms para ativar a animação do header
+})
+
+/*===============================================
+HEADER MENU - TOGGLE DO MENU HAMBÚRGUER
+===============================================
+
+Este script controla o menu hambúrguer em dispositivos móveis.
+
+Funcionalidade:
+- Ao clicar no botão hambúrguer, o menu lateral abre/fecha
+- Animação do ícone hambúrguer para "X"
+*/
+
+document.addEventListener('DOMContentLoaded', function () {
+  const hamburger = document.getElementById('hamburger')
+  const navMenu = document.querySelector('header nav ul')
+
+  // Verifica se os elementos existem
+  if (hamburger && navMenu) {
+    // Adiciona o evento de clique no botão hambúrguer
+    hamburger.addEventListener('click', function () {
+      this.classList.toggle('active')
+      navMenu.classList.toggle('active')
+    })
+  }
+})
 
 /*=============== EMAIL JS ===============*/
 const contactForm = document.getElementById('contact-form'),
   contactMessage = document.getElementById('contact-message')
 
-const sendEmail = (e) => {
+const sendEmail = e => {
   e.preventDefault()
 
-  /*   
+  /*
       The code for sending emails is just an example.
 
-      Create your account at https://www.emailjs.com/ and 
-      follow the instructions in the images for sending emails 
+      Create your account at https://www.emailjs.com/ and
+      follow the instructions in the images for sending emails
       that are in the project folder.
    */
 
@@ -70,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const supportsPlaysinline = 'playsInline' in document.createElement('video')
 
   if (isMobile || supportsPlaysinline) {
-    videos.forEach((video) => {
+    videos.forEach(video => {
       video.setAttribute('playsinline', 'true')
       video.setAttribute('webkit-playsinline', 'true')
     })
@@ -89,7 +139,7 @@ const sr = ScrollReveal({
 sr.reveal(`.perfil, .contact__form`)
 sr.reveal(`.info`, { origin: 'left', delay: 800 })
 sr.reveal(`.skills`, { origin: 'left', delay: 1000 })
-sr.reveal(`.about`, { origin: 'right', delay: 1200 })
+sr.reveal(`.about`, { origin: 'right', delay: 1000 })
 sr.reveal(`.projects__card, .services__card, .experience__card`, {
   interval: 100
 })
@@ -103,7 +153,7 @@ function isMobile() {
 
 // Desktop (hover)
 if (!isMobile()) {
-  document.querySelectorAll('.video-preview').forEach((preview) => {
+  document.querySelectorAll('.video-preview').forEach(preview => {
     const video = preview.querySelector('.projects__video')
 
     preview.addEventListener('mouseenter', () => {
@@ -124,7 +174,7 @@ if (isMobile()) {
   const videos = document.querySelectorAll('.projects__video')
 
   // Configurações obrigatórias para autoplay silencioso
-  videos.forEach((video) => {
+  videos.forEach(video => {
     video.setAttribute('muted', '')
     video.setAttribute('playsinline', '')
     video.setAttribute('preload', 'auto')
@@ -133,8 +183,8 @@ if (isMobile()) {
 
   // Observer para tocar/pause com base na visibilidade
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
+    entries => {
+      entries.forEach(entry => {
         const video = entry.target
         const preview = video.closest('.video-preview')
 
@@ -144,7 +194,7 @@ if (isMobile()) {
             .then(() => {
               if (preview) preview.classList.add('video-visible')
             })
-            .catch((err) => {
+            .catch(err => {
               console.warn('Erro ao reproduzir vídeo no scroll:', err)
             })
         } else {
@@ -159,11 +209,11 @@ if (isMobile()) {
     }
   )
 
-  videos.forEach((video) => observer.observe(video))
+  videos.forEach(video => observer.observe(video))
 
   // 🔓 Desbloqueia autoplay em iOS após primeiro toque
   const desbloquearAutoplay = () => {
-    videos.forEach((video) => {
+    videos.forEach(video => {
       video
         .play()
         .then(() => {
@@ -180,6 +230,39 @@ if (isMobile()) {
   document.addEventListener('touchstart', desbloquearAutoplay)
   document.addEventListener('click', desbloquearAutoplay)
 }
+
+/*=============== SMOOTH SCROLL WITH HEADER OFFSET ===============*/
+// Função para scroll suave considerando a altura do header fixo
+function smoothScrollTo(targetId, offset = 100) {
+  const target = document.getElementById(targetId)
+  if (target) {
+    const headerHeight = 0 // Altura do header após animação
+    const targetPosition = target.offsetTop - headerHeight - offset
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
+// Adiciona evento de clique nos links de navegação
+document.addEventListener('DOMContentLoaded', function () {
+  // Seleciona todos os links de navegação
+  const navLinks = document.querySelectorAll('header nav ul li a')
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault() // Previne o comportamento padrão
+
+      const href = this.getAttribute('href')
+      if (href && href.startsWith('#')) {
+        const targetId = href.substring(1) // Remove o # do início
+        smoothScrollTo(targetId)
+      }
+    })
+  })
+})
 
 /*=============== FLOATIN ACTION BUTTTON ===============*/
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+dist/
+build/
+
+# Generated files
+*.min.js
+*.min.css
+*.bundle.js
+
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Config files that shouldn't be formatted
+.gitignore
+.gitattributes
+
+# Documentation that should keep original formatting
+CHANGELOG.md
+LICENSE
+
+# Images and assets
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+*.ico
+*.pdf
+*.mp4
+
+# Specific files
+public/assets/

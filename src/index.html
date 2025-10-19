@@ -25,7 +25,7 @@
 
         function isExtensionError(args) {
           const message = args.join(' ')
-          return PATTERNS.some((pattern) => pattern.test(message))
+          return PATTERNS.some(pattern => pattern.test(message))
         }
 
         console.error = function (...args) {
@@ -78,6 +78,8 @@
         }
       })()
     </script>
+    <!-- CSS do Header -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Fallback para navegadores antigos -->
@@ -104,6 +106,11 @@
 
     <!-- Autor (SEO extra) -->
     <meta name="author" content="Harry Schlorke" />
+
+    <link rel="stylesheet" href="./styles.css" />
+
+    <!-- jQuery (necessário para presentation.js) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Favicon e Manifest -->
     <link
@@ -249,6 +256,7 @@
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-78FTGT8E17"
     ></script>
+
     <script>
       window.dataLayer = window.dataLayer || []
       function gtag() {
@@ -283,10 +291,55 @@
   </head>
 
   <body>
+    <!--
+        ==========================================
+        HEADER ANIMADO - COMPONENTE REUTILIZÁVEL
+        ==========================================
+
+        Este header possui:
+        - Animação de entrada (tela cheia para barra fixa)
+        - Logo centralizada que se move para a esquerda
+        - Imagem de fundo que desaparece
+        - Menu de navegação que aparece após animação
+        - Menu hambúrguer responsivo para mobile
+    -->
+
+    <header>
+      <!-- Imagem de fundo que aparece na animação inicial -->
+      <img
+        src="assets/img/Background.png"
+        class="background"
+        alt="Imagem de fundo"
+      />
+
+      <!-- Logo -->
+      <a href="" class="logo">
+        <img src="assets/img/Harry-Schlorke.png" alt="Logo" />
+      </a>
+
+      <!-- Navegação -->
+      <nav>
+        <ul>
+          <li><a href="#Home">Início</a></li>
+          <li><a href="#Projetos Recentes">Projetos</a></li>
+          <li><a href="#Serviços">Serviços</a></li>
+          <li><a href="#Experiência">Experiência</a></li>
+          <li><a href="#Contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Botão Hambúrguer (Menu Mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
     <!--==================== MAIN ====================-->
-    <main class="main">
+    <main class="main" id="Home">
       <!--==================== HOME ====================-->
-      <section class="home section" id="home">
+      <section class="home section">
         <div class="home__container container grid">
           <!--===== PERFIL =====-->
           <div class="perfil">
@@ -312,13 +365,13 @@
 
               <div class="perfil__buttons">
                 <a
-                  href="#projects"
+                  href="#Projetos Recentes"
                   class="button"
                   aria-label="Ir para a seção de projetos"
                   >Projetos</a
                 >
                 <a
-                  href="#services"
+                  href="#Serviços"
                   class="button button__black"
                   aria-label="Ir para a seção de serviços"
                   >Serviços</a
@@ -348,7 +401,7 @@
               Rua Cervantes nº 39, Jardim Botânico, Porto Alegre - RS.
             </p>
             <a
-              href="#contact"
+              href="#Contato"
               class="button"
               aria-label="Ir para a seção de contato"
               >CONTATO</a
@@ -502,7 +555,7 @@
       </section>
 
       <!--==================== PROJECTS ====================-->
-      <section class="projects section" id="projects">
+      <section class="projects section" id="Projetos Recentes">
         <h2 class="section__title">PROJETOS RECENTES</h2>
 
         <div class="projects__container container grid">
@@ -648,7 +701,7 @@
           </article>
           <article class="projects__card">
             <a
-              href="https://gblocacoes.vercel.app/"
+              href="https://locacoesgb.com.br/"
               target="_blank"
               rel="noopener noreferrer"
               class="projects__image video-preview"
@@ -707,7 +760,7 @@
               </div>
 
               <a
-                href="https://gblocacoes.vercel.app/"
+                href="https://locacoesgb.com.br/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="projects__button"
@@ -1035,7 +1088,7 @@
       </section>
 
       <!--==================== SERVICES ====================-->
-      <section class="services section" id="services">
+      <section class="services section" id="Serviços">
         <h2 class="section__title">SERVIÇOS</h2>
 
         <div class="services__container container grid">
@@ -1081,7 +1134,7 @@
       </section>
 
       <!--==================== EXPERIENCE ====================-->
-      <section class="experience section" id="experience">
+      <section class="experience section" id="Experiência">
         <h2 class="section__title">EXPERIÊNCIA</h2>
 
         <div class="experience__container container grid">
@@ -1130,7 +1183,7 @@
       </section>
 
       <!--==================== CONTACT ====================-->
-      <section class="contact section" id="contact">
+      <section class="contact section" id="Contato">
         <h2 class="section__title">CONTATO</h2>
 
         <div class="contact__container container grid">
@@ -1193,26 +1246,44 @@
 
           <ul class="footer__links">
             <li>
-              <a href="#home" class="footer__link" aria-label="Ir para o início"
+              <a href="#Home" class="footer__link" aria-label="Ir para o Início"
                 >Início</a
               >
             </li>
 
             <li>
               <a
-                href="#projects"
+                href="#Projetos Recentes"
                 class="footer__link"
-                aria-label="Ir para projetos"
+                aria-label="Ir para Projetos"
                 >Projetos</a
               >
             </li>
 
             <li>
               <a
-                href="#services"
+                href="#Serviços"
                 class="footer__link"
                 aria-label="Ir para serviços"
                 >Serviços</a
+              >
+            </li>
+
+            <li>
+              <a
+                href="#Experiência"
+                class="footer__link"
+                aria-label="Ir para Experiência"
+                >Experiência</a
+              >
+            </li>
+
+            <li>
+              <a
+                href="#Contato"
+                class="footer__link"
+                aria-label="Ir para Contato"
+                >Contato</a
               >
             </li>
           </ul>
@@ -1301,6 +1372,8 @@
     </div>
 
     <!--=============== MAIN JS ===============-->
+    <!-- jQuery (necessário para presentation.js) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="module" src="./main.js" defer></script>
   </body>
 </html>

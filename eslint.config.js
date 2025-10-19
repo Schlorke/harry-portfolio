@@ -13,7 +13,9 @@ export default [
         emailjs: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
-        IntersectionObserver: 'readonly'
+        IntersectionObserver: 'readonly',
+        $: 'readonly',
+        jQuery: 'readonly'
       }
     },
     rules: {
@@ -26,12 +28,6 @@ export default [
     }
   },
   {
-    ignores: [
-      'node_modules/**',
-      'dist/**',
-      'build/**',
-      '*.min.js',
-      '*.min.css'
-    ]
+    ignores: ['node_modules/**', 'dist/**', 'build/**', '*.min.js', '*.min.css']
   }
-];
+]

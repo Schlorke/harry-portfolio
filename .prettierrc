@@ -2,5 +2,16 @@
   "singleQuote": true,
   "semi": false,
   "tabWidth": 2,
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "printWidth": 80,
+  "useTabs": false,
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "avoid",
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css",
+  "proseWrap": "preserve",
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": true,
+  "embeddedLanguageFormatting": "auto"
 }
