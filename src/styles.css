@@ -86,6 +86,7 @@ button {
 body {
   background-color: var(--body-color);
   color: var(--white-color);
+  margin-top: 60px; /* Ajuste conforme necessário */
 }
 
 /*========== HEADER - ESTILOS PRINCIPAIS ==========*/
@@ -397,7 +398,6 @@ video {
 
 .main {
   overflow: hidden;
-  padding-top: 3rem; /* Espaçamento para compensar header de 80px + margem adicional */
 }
 
 /*=============== NAV ===============*/
