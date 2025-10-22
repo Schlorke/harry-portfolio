@@ -60,6 +60,25 @@ const contactForm = document.getElementById('contact-form'),
 const sendEmail = e => {
   e.preventDefault()
 
+  // Adiciona a data e hora atual ao formulário
+  const currentDateTime = new Date().toLocaleString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  })
+
+  // Cria um campo oculto para a data/hora
+  const timeInput = document.createElement('input')
+  timeInput.type = 'hidden'
+  timeInput.name = 'time'
+  timeInput.value = currentDateTime
+
+  // Adiciona o campo ao formulário
+  contactForm.appendChild(timeInput)
+
   /*
       The code for sending emails is just an example.
 
@@ -89,16 +108,65 @@ const sendEmail = e => {
 
         // Clear input fields
         contactForm.reset()
+
+        // Remove o campo de data/hora após o envio
+        contactForm.removeChild(timeInput)
       },
       () => {
         // Show error message
         contactMessage.textContent = 'Mensagem não enviada (erro no serviço) ❌'
+
+        // Remove o campo de data/hora em caso de erro
+        if (contactForm.contains(timeInput)) {
+          contactForm.removeChild(timeInput)
+        }
       }
     )
 }
 if (contactForm) {
   contactForm.addEventListener('submit', sendEmail)
 }
+
+/*=============== PHONE FORMATTING ===============*/
+// Função para formatar telefone brasileiro
+function formatPhoneNumber(value) {
+  // Remove todos os caracteres não numéricos
+  const numbers = value.replace(/\D/g, '')
+
+  // Limita a 11 dígitos (DDD + 9 dígitos)
+  const limitedNumbers = numbers.slice(0, 11)
+
+  // Aplica a formatação baseada no número de dígitos
+  if (limitedNumbers.length <= 2) {
+    return limitedNumbers
+  } else if (limitedNumbers.length <= 7) {
+    return `(${limitedNumbers.slice(0, 2)}) ${limitedNumbers.slice(2)}`
+  } else if (limitedNumbers.length <= 11) {
+    return `(${limitedNumbers.slice(0, 2)}) ${limitedNumbers.slice(2, 3)} ${limitedNumbers.slice(3, 7)}-${limitedNumbers.slice(7)}`
+  }
+
+  return limitedNumbers
+}
+
+// Adiciona o evento de formatação ao campo de telefone
+document.addEventListener('DOMContentLoaded', function () {
+  const phoneInput = document.getElementById('phone-input')
+
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function (e) {
+      const formattedValue = formatPhoneNumber(e.target.value)
+      e.target.value = formattedValue
+    })
+
+    // Previne a entrada de caracteres não numéricos
+    phoneInput.addEventListener('keypress', function (e) {
+      const char = String.fromCharCode(e.which)
+      if (!/[0-9]/.test(char)) {
+        e.preventDefault()
+      }
+    })
+  }
+})
 
 /*=============== BROWSER COMPATIBILITY ===============*/
 // Aplica recursos modernos apenas em navegadores que suportam
