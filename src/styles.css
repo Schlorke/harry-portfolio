@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap');
+
 /*=============== VARIABLES CSS ===============*/
 :root {
   /*========== Colors ==========*/
@@ -87,6 +89,7 @@ body {
   background-color: var(--body-color);
   color: var(--white-color);
   margin-top: 60px; /* Ajuste conforme necessário */
+  overflow-x: hidden; /* evita corte lateral em telas estreitas */
 }
 
 /*========== HEADER - ESTILOS PRINCIPAIS ==========*/
@@ -110,6 +113,31 @@ header {
 header.animate_header {
   height: 80px; /* Reduz a altura após a animação */
   background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Evita FOUC at� o React hidratar e habilitar as anima��es */
+header.header-preload .logo,
+header.header-preload nav ul,
+header.header-preload .hamburger {
+  transition: none !important;
+}
+
+header.header-preload nav ul {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateX(100px) !important;
+}
+
+@media (max-width: 784px) {
+  header.header-preload nav ul {
+    transform: translateX(100%) !important;
+  }
+
+  header.header-preload .hamburger {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-50%) translateX(50px) !important;
+  }
 }
 
 /*========== LOGO ==========*/
@@ -255,20 +283,20 @@ header nav ul li a:hover {
     border: none;
     cursor: pointer;
     top: 50%;
-    right: -50px; /* Inicia fora da tela */
-    transform: translateY(-50%);
+    right: 35px;
+    transform: translateY(-50%) translateX(50px);
     opacity: 0;
     visibility: hidden;
     transition:
-      opacity 0.8s ease 1.8s,
-      right 0.8s ease 1.8s;
+      opacity 0.8s ease,
+      transform 0.8s ease;
     z-index: 10;
   }
 
-  header.animate_header .hamburger {
+  .hamburger.nav-ready {
     opacity: 1;
     visibility: visible;
-    right: 35px;
+    transform: translateY(-50%) translateX(0);
   }
 
   /* Barras do hambúrguer */
@@ -303,22 +331,38 @@ header nav ul li a:hover {
   header nav ul {
     flex-direction: column;
     position: fixed;
-    top: 0;
-    right: -100%; /* Inicia fora da tela */
+    inset: 0;
+    transform: translateX(100%);
     height: 100vh;
-    width: 50%;
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 50px 60px;
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.94);
+    padding: 96px 40px 120px;
     opacity: 0;
+    visibility: hidden;
+    justify-content: flex-start;
+    gap: 1.75rem;
+    align-items: flex-start;
+    overflow-y: auto;
     transition:
-      right 0.3s ease,
-      opacity 0.5s ease;
+      transform 0.3s ease,
+      opacity 0.5s ease,
+      visibility 0.3s ease;
+    z-index: 1200;
+  }
+
+  /* Desativa a animação desktop no mobile (fica escondido até o active) */
+  header nav ul.animate_nav {
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
   }
 
   /* Menu ativo */
   header nav ul.active {
-    right: 0;
+    transform: translateX(0);
     opacity: 1;
+    visibility: visible;
   }
 
   header nav ul li {
@@ -377,8 +421,10 @@ video {
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
+  width: 100%;
   max-width: 1168px;
-  margin-inline: 1.5rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
 }
 
 .grid {
@@ -397,21 +443,21 @@ video {
 }
 
 .main {
-  overflow: hidden;
+  overflow-x: hidden; /* previne recorte lateral e permite scroll vertical */
 }
 
 /*=============== NAV ===============*/
 .nav {
   position: fixed;
   bottom: 1.5rem;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: hsla(0, 0%, 98%, 0.1);
-  width: 88%;
-  margin-inline: auto;
+  width: calc(100% - 3rem);
+  max-width: 520px;
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-  padding: 1rem 2rem;
+  padding: 1rem 1.25rem;
   border-radius: 4rem;
   z-index: var(--z-fixed);
 }
@@ -728,7 +774,9 @@ video {
 .projects__video {
   position: absolute;
   object-fit: cover;
-  width: 420px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   transition:
     transform 0.4s,
     opacity 1.3s ease-in-out;
@@ -983,13 +1031,22 @@ video {
   display: grid;
   place-items: center;
   transition:
-    background-color 0.4s,
-    color 0.4s;
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .footer__social-link:hover {
   background-color: var(--white-color);
   color: var(--black-color);
+}
+
+/* Quando usado no FAB, manter consistência */
+.fab-option.footer__social-link {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .footer__copy {
@@ -1111,7 +1168,21 @@ video {
   cursor: pointer;
   opacity: 0;
   transform: translateY(10px);
-  transition: all 0.3s;
+  /* Transições base - hover sempre sem delay */
+  transition-property: opacity, transform, background-color, color;
+  transition-duration: 0.3s, 0.3s, 0.3s, 0.3s;
+  transition-timing-function: ease, ease, ease, ease;
+  transition-delay: 0s, 0s, 0s, 0s;
+}
+
+/* Quando o botão está visível, FORÇA delay 0 para todas as propriedades */
+.fab-option.fab-visible {
+  transition-delay: 0s !important;
+}
+
+/* Garante que hover sempre seja instantâneo, mesmo com delay inline */
+.fab-option.fab-visible:hover {
+  transition-delay: 0s !important;
 }
 /* Ajuste para os links dentro dos botões */
 .fab-option a {
@@ -1125,17 +1196,25 @@ video {
 .fab-option i {
   font-size: 32px; /* Tamanho do ícone */
   color: var(--white-color); /* Cor do ícone */
-  transition: transform 0.2s ease-in-out;
+  transition: color 0.3s ease;
 }
 
-/* Efeito hover para aumentar o ícone */
+/* Efeito hover para aumentar o ícone - SEMPRE sem delay */
+/* O !important garante que o hover sempre tenha delay 0, mesmo com delay inline */
 .fab-option:hover {
-  background: var(--white-color);
-  transform: scale(1.1);
+  background-color: var(--white-color) !important;
+  /* Mantém translateY(0) e adiciona scale */
+  transform: translateY(0) scale(1.1) !important;
+  /* Nova transição que sobrescreve qualquer delay inline - SEMPRE delay 0 no hover */
+  transition:
+    background-color 0.3s ease 0s !important,
+    transform 0.3s ease 0s !important,
+    color 0.3s ease 0s !important;
 }
 
 .fab-option:hover i {
-  color: var(--first-color);
+  color: var(--first-color) !important;
+  transition: color 0.3s ease 0s !important;
 }
 
 /*=============== SCROLL BAR ===============*/
@@ -1158,7 +1237,7 @@ video {
 /* For small devices */
 @media screen and (max-width: 320px) {
   .container {
-    margin-inline: 1rem;
+    padding-inline: 1rem;
   }
 
   .nav {
@@ -1184,9 +1263,6 @@ video {
   }
   .about__img {
     margin-top: 6rem; /* Leve ajuste sem impacto nas bordas */
-  }
-  .nav {
-    width: max-content;
   }
   .nav__list {
     column-gap: 1.25rem;
@@ -1417,6 +1493,7 @@ video {
     top: 0;
     bottom: 0;
     margin-block: auto;
+    transform: none;
   }
   .nav__list {
     flex-direction: column;

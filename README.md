@@ -6,7 +6,8 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-> **Portfólio profissional moderno e responsivo desenvolvido com as mais recentes tecnologias web, focado em performance, acessibilidade e experiência do usuário.**
+> **Portfólio profissional moderno e responsivo desenvolvido com as mais recentes tecnologias web,
+> focado em performance, acessibilidade e experiência do usuário.**
 
 ## 📋 Índice
 
@@ -28,7 +29,9 @@
 
 ## 🎯 Sobre o Projeto
 
-Este portfólio foi desenvolvido com o objetivo de apresentar minhas habilidades técnicas, criatividade e capacidade de entregar soluções web robustas e escaláveis. Toda a aplicação é responsiva, com foco em performance, usabilidade e acessibilidade.
+Este portfólio foi desenvolvido com o objetivo de apresentar minhas habilidades técnicas, criatividade e
+capacidade de entregar soluções web robustas e escaláveis. Toda a aplicação é responsiva, com foco em
+performance, usabilidade e acessibilidade.
 
 ### Principais Características
 
@@ -57,9 +60,9 @@ Este portfólio foi desenvolvido com o objetivo de apresentar minhas habilidades
 ### Core Technologies
 
 - **[Vite 7.1.3](https://vitejs.dev/)** - Build tool e desenvolvimento
-- **[Vanilla JavaScript ES6+](https://developer.mozilla.org/en-US/docs/Web/JavaScript)** - Lógica da aplicação
-- **[HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML)** - Estrutura semântica
-- **[CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)** - Estilização avançada
+- **[React 18](https://react.dev/)** - Camada de UI e componentes reutilizáveis
+- **[TypeScript 5](https://www.typescriptlang.org/)** - Tipagem estática para segurança e manutenção
+- **[Tailwind CSS 3](https://tailwindcss.com/)** - Estilização utilitária com purge JIT
 
 ### Libraries & APIs
 
@@ -177,16 +180,6 @@ pnpm preview
 | `pnpm spell-check`  | Verificação ortográfica            |
 | `pnpm deploy`       | Deploy para GitHub Pages           |
 
-### Scripts Específicos
-
-```bash
-# Formatação por tipo de arquivo
-pnpm format:js    # Apenas JavaScript
-pnpm format:css   # Apenas CSS
-pnpm format:html  # Apenas HTML
-pnpm format:md    # Apenas Markdown
-```
-
 ## 📁 Estrutura do Projeto
 
 ```text
@@ -199,18 +192,19 @@ harry-portfolio/
 │   ├── robots.txt               # SEO crawlers
 │   └── sitemap.xml              # Mapa do site
 ├── 📁 src/                      # Código fonte
-│   ├── index.html               # HTML principal
-│   ├── main.js                  # JavaScript principal
+│   ├── index.html               # Template Vite
+│   ├── main.tsx                 # Entrada React/TypeScript
+│   ├── main.css                 # Tailwind (base/components/utilities)
 │   └── styles.css               # Estilos globais
 ├── 📁 docs/                     # Documentação
 ├── 📁 .vscode/                  # Configurações VS Code
-├── 📄 package.json              # Dependências e scripts
-├── 📄 vite.config.js            # Configuração Vite
-├── 📄 eslint.config.js          # Configuração ESLint
-├── 📄 cspell.json               # Configuração spell check
-├── 📄 CHANGELOG.md              # Histórico de mudanças
-├── 📄 CONTRIBUTING.md           # Guia de contribuição
-└── 📄 README.md                 # Documentação principal
+├── package.json                 # Dependências e scripts
+├── vite.config.js               # Configuração Vite
+├── eslint.config.js             # Configuração ESLint
+├── cspell.json                  # Configuração spell check
+├── CHANGELOG.md                 # Histórico de mudanças
+├── CONTRIBUTING.md              # Guia de contribuição
+└── README.md                    # Documentação principal
 ```
 
 ## ⚙️ Configuração
