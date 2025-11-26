@@ -146,7 +146,6 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <p className='projects__description'>{project.description}</p>
         <div className='projects__skills'>
           {project.skills.map((skill, index) => (
-            // eslint-disable-next-line @next/next/no-img-element
             <img
               key={index}
               src={skill}

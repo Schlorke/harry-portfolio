@@ -15,8 +15,7 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
   },
 
-  // Otimizações de build
-  swcMinify: true,
+  // Otimizações de build (swcMinify é padrão no Next.js 16)
 
   // Headers de segurança e performance
   async headers() {

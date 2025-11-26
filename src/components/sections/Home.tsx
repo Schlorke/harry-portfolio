@@ -164,7 +164,6 @@ const Home = () => {
 
           <div className='skills__items'>
             {skills.map((skill, index) => (
-              // eslint-disable-next-line @next/next/no-img-element
               <img
                 key={index}
                 src={skill}
