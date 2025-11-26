@@ -10,20 +10,43 @@ const Header = () => {
   const { handleLinkClick } = useSmoothScroll()
 
   useEffect(() => {
-    const readyFrame = requestAnimationFrame(() => setIsReady(true))
+    let readyFrame: number | null = null
+    let timer1: ReturnType<typeof setTimeout> | null = null
+    let timer2: ReturnType<typeof setTimeout> | null = null
 
-    const timer1 = setTimeout(() => {
-      setIsAnimated(true)
-    }, 1500)
+    const startHeaderSequence = () => {
+      if (readyFrame !== null) return
+      readyFrame = requestAnimationFrame(() => setIsReady(true))
 
-    const timer2 = setTimeout(() => {
-      setIsNavVisible(true)
-    }, 3080)
+      timer1 = setTimeout(() => {
+        setIsAnimated(true)
+      }, 1500)
+
+      timer2 = setTimeout(() => {
+        setIsNavVisible(true)
+      }, 3080)
+    }
+
+    const handlePageReady = () => {
+      startHeaderSequence()
+      window.removeEventListener('page-ready', handlePageReady)
+    }
+
+    if (typeof document !== 'undefined') {
+      if (document.body?.classList.contains('page-ready')) {
+        startHeaderSequence()
+      } else {
+        window.addEventListener('page-ready', handlePageReady)
+      }
+    }
 
     return () => {
-      cancelAnimationFrame(readyFrame)
-      clearTimeout(timer1)
-      clearTimeout(timer2)
+      if (readyFrame !== null) {
+        cancelAnimationFrame(readyFrame)
+      }
+      if (timer1) clearTimeout(timer1)
+      if (timer2) clearTimeout(timer2)
+      window.removeEventListener('page-ready', handlePageReady)
     }
   }, [])
 
@@ -48,6 +71,8 @@ const Header = () => {
           alt='Imagem de fundo'
           fill
           style={{ objectFit: 'cover' }}
+          priority
+          fetchPriority='high'
         />
       </div>
 
@@ -58,6 +83,8 @@ const Header = () => {
           alt='Logo'
           width={160}
           height={61}
+          priority
+          fetchPriority='high'
         />
       </a>
 

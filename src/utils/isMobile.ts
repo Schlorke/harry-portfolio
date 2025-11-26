@@ -5,4 +5,3 @@ export const isMobile = (): boolean => {
     navigator.userAgent
   )
 }
-

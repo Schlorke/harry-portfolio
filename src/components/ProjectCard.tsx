@@ -17,6 +17,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     if (!videoRef.current) return
 
     const video = videoRef.current
+    video.preload = 'auto'
+    video.load()
 
     if (mobile) {
       // Configurações para mobile

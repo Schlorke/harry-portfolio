@@ -1,6 +1,11 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import './globals.css'
+import { projects } from '../data'
+
+const projectVideos = projects
+  .map(project => project.video)
+  .filter((video): video is string => Boolean(video))
 
 export const metadata: Metadata = {
   title: 'Harry Schlorke - Desenvolvedor Full-Stack',
@@ -49,6 +54,34 @@ export default function RootLayout({
   return (
     <html lang='pt-BR'>
       <head>
+        <Script id='page-readiness' strategy='beforeInteractive'>
+          {`
+            const ready = async () => {
+              const waitForFonts = document?.fonts?.ready ?? Promise.resolve();
+              await Promise.all([
+                waitForFonts,
+                new Promise(resolve => window.addEventListener('load', resolve, { once: true }))
+              ]);
+              document.body?.classList.remove('page-loading');
+              document.body?.classList.add('page-ready');
+              document.documentElement?.classList.add('page-ready');
+              window.dispatchEvent(new Event('page-ready'));
+            };
+            ready();
+          `}
+        </Script>
+        <link rel='preload' as='image' href='/assets/img/Background.png' />
+        <link rel='preload' as='image' href='/assets/img/Harry-Schlorke.png' />
+        {projectVideos.map(video => (
+          <link
+            key={video}
+            rel='preload'
+            as='video'
+            href={video}
+            type='video/mp4'
+            crossOrigin='anonymous'
+          />
+        ))}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link
           rel='preconnect'
@@ -64,7 +97,7 @@ export default function RootLayout({
           href='https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css'
         />
       </head>
-      <body>
+      <body className='page-loading'>
         {children}
         <Script
           src='https://www.googletagmanager.com/gtag/js?id=G-78FTGT8E17'

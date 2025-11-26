@@ -92,6 +92,16 @@ body {
   overflow-x: hidden; /* evita corte lateral em telas estreitas */
 }
 
+body.page-loading {
+  opacity: 0;
+  visibility: hidden;
+}
+
+body.page-ready {
+  opacity: 1;
+  visibility: visible;
+}
+
 /*========== HEADER - ESTILOS PRINCIPAIS ==========*/
 header {
   position: fixed;
