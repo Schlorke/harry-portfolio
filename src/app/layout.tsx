@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import './globals.css'
-import '../styles.css'
 
 export const metadata: Metadata = {
   title: 'Harry Schlorke - Desenvolvedor Full-Stack',
@@ -11,7 +10,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/assets/img/favicon.ico' },
-      { url: '/assets/img/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      {
+        url: '/assets/img/favicon-96x96.png',
+        sizes: '96x96',
+        type: 'image/png'
+      },
       { url: '/assets/img/favicon.svg', type: 'image/svg+xml' }
     ],
     apple: [{ url: '/assets/img/apple-touch-icon.png', sizes: '180x180' }]
@@ -47,7 +50,11 @@ export default function RootLayout({
     <html lang='pt-BR'>
       <head>
         <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='' />
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+          crossOrigin=''
+        />
         <link
           rel='stylesheet'
           href='https://fonts.googleapis.com/icon?family=Material+Icons'

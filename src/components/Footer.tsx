@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useSmoothScroll } from '../hooks/useSmoothScroll'
 
 const Footer = () => {
@@ -16,7 +17,7 @@ const Footer = () => {
       <div className='footer__container container grid'>
         <div className='footer__content grid'>
           <a href='#' className='footer__logo'>
-            <img
+            <Image
               src='/assets/img/Harry-Schlorke.png'
               width={160}
               height={61}

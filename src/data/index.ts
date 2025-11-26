@@ -155,3 +155,4 @@ export const skills = [
   '/assets/img/skills-figma.svg',
   '/assets/img/skills-photoshop.svg'
 ]
+

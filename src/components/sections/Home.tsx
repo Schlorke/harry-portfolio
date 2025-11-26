@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { skills } from '../../data'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { useSmoothScroll } from '../../hooks/useSmoothScroll'
@@ -11,7 +12,7 @@ const Home = () => {
       <div className='home__container container grid'>
         {/* Perfil */}
         <div className='perfil'>
-          <img
+          <Image
             src='/assets/img/Home-Harry.webp'
             width={304}
             height={415}
@@ -22,8 +23,10 @@ const Home = () => {
           />
 
           <div className='perfil__data'>
-            <img
+            <Image
               src='/assets/img/Harry-Schlorke.png'
+              width={160}
+              height={61}
               loading='lazy'
               alt='Logotipo com nome Harry Schlorke'
               title='Harry Schlorke'
@@ -126,7 +129,7 @@ const Home = () => {
           </div>
 
           <div className='about__image'>
-            <img
+            <Image
               src='/assets/img/about-Harry.webp'
               width={443}
               height={538}
@@ -159,9 +162,11 @@ const Home = () => {
 
           <div className='skills__items'>
             {skills.map((skill, index) => (
-              <img
+              <Image
                 key={index}
                 src={skill}
+                width={48}
+                height={48}
                 loading='lazy'
                 alt={`Skill ${index}`}
                 className='skills__item'

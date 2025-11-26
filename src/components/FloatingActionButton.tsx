@@ -38,7 +38,7 @@ const FloatingActionButton = () => {
     } else {
       setAnimationComplete(false)
     }
-  }, [isActive])
+  }, [isActive, socialLinks.length])
 
   return (
     <>

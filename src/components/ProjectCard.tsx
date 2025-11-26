@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { Project } from '../types'
 import { isMobile } from '../utils/isMobile'
@@ -115,7 +116,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         rel='noopener noreferrer'
         className={`projects__image video-preview ${isVideoVisible ? 'video-visible' : ''}`}
       >
-        <img
+        <Image
           src={project.image}
           width={320}
           height={210}
@@ -143,9 +144,11 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <p className='projects__description'>{project.description}</p>
         <div className='projects__skills'>
           {project.skills.map((skill, index) => (
-            <img
+            <Image
               key={index}
               src={skill}
+              width={24}
+              height={24}
               loading='lazy'
               alt={`Skill ${index}`}
               title={`Skill ${index}`}

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useSmoothScroll } from '../hooks/useSmoothScroll'
 
@@ -40,15 +41,24 @@ const Header = () => {
   return (
     <header className={headerClasses}>
       {/* Background Image */}
-      <img
-        src='/assets/img/Background.png'
-        className='background'
-        alt='Imagem de fundo'
-      />
+      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+        <Image
+          src='/assets/img/Background.png'
+          className='background'
+          alt='Imagem de fundo'
+          fill
+          style={{ objectFit: 'cover' }}
+        />
+      </div>
 
       {/* Logo */}
       <a href='' className='logo'>
-        <img src='/assets/img/Harry-Schlorke.png' alt='Logo' />
+        <Image
+          src='/assets/img/Harry-Schlorke.png'
+          alt='Logo'
+          width={160}
+          height={61}
+        />
       </a>
 
       {/* Navigation */}

@@ -20,3 +20,4 @@
   },
   "globs": ["*.md", "**/*.md", "!node_modules/**", "!dist/**"]
 }
+
