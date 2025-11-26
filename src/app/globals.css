@@ -210,16 +210,13 @@ header nav ul {
   padding: 1.92rem 0;
   align-items: center;
   visibility: hidden;
-  opacity: 0;
-  transition:
-    opacity 1s ease,
-    transform 1s ease;
+  opacity: 1;
+  transition: transform 1s ease;
   transform: translateX(100px); /* Inicia à direita fora da tela */
 }
 
 /* Menu aparece após animação */
 header nav ul.animate_nav {
-  opacity: 1;
   visibility: visible;
   transform: translateX(0);
   z-index: 1;
@@ -349,7 +346,7 @@ header nav ul li a:hover {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.94);
     padding: 96px 40px 120px;
-    opacity: 0;
+    opacity: 1;
     visibility: hidden;
     justify-content: flex-start;
     gap: 1.75rem;
@@ -357,7 +354,6 @@ header nav ul li a:hover {
     overflow-y: auto;
     transition:
       transform 0.3s ease,
-      opacity 0.5s ease,
       visibility 0.3s ease;
     z-index: 1200;
   }
@@ -365,14 +361,12 @@ header nav ul li a:hover {
   /* Desativa a animação desktop no mobile (fica escondido até o active) */
   header nav ul.animate_nav {
     transform: translateX(100%);
-    opacity: 0;
     visibility: hidden;
   }
 
   /* Menu ativo */
   header nav ul.active {
     transform: translateX(0);
-    opacity: 1;
     visibility: visible;
   }
 
