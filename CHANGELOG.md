@@ -20,6 +20,17 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - 📋 Arquivo `docs/AI_CHANGELOG.md` - registro de alterações por componente para contexto de IAs
 - 📝 Regra para atualizar `README.md` quando houver mudanças na estrutura do projeto
 - 🤖 Arquivo `.cursor/rules/harry-portfolio.mdc` - regras e contexto para IAs do Cursor IDE
+- ✨ Hook `useVideoPlayer` - encapsula lógica de reprodução de vídeo com suporte a desktop (hover) e mobile (scroll)
+
+### Changed
+
+- 🔄 **Reorganização de componentes:** Nova estrutura `components/ui/` e `components/feature/`
+  - `ProjectCard` movido para `components/ui/`
+  - `Header`, `Footer`, `FloatingActionButton` movidos para `components/feature/`
+- ♻️ **Refatoração do ProjectCard:** Lógica de vídeo extraída para hook `useVideoPlayer`
+  - Código do componente reduzido de ~176 para ~80 linhas
+  - Melhor separação de responsabilidades
+- 📦 Imports atualizados em `page.tsx` e `Projects.tsx` para usar barrel files
 
 ### Planned
 

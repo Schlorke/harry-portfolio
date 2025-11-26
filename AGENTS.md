@@ -81,22 +81,28 @@ src/
 │   └── page.tsx            # Página principal
 │
 ├── components/             # Componentes React
-│   ├── sections/           # Seções da página
-│   │   ├── Home.tsx        # Hero section
-│   │   ├── Projects.tsx    # Galeria de projetos
-│   │   ├── Services.tsx    # Serviços oferecidos
-│   │   ├── Experience.tsx  # Timeline de experiência
-│   │   └── Contact.tsx     # Formulário de contato
+│   ├── feature/            # Componentes específicos da aplicação
+│   │   ├── Header.tsx      # Cabeçalho e navegação
+│   │   ├── Footer.tsx      # Rodapé
+│   │   ├── FloatingActionButton.tsx  # FAB de redes sociais
+│   │   └── index.ts        # Barrel exports
 │   │
-│   ├── Header.tsx          # Cabeçalho e navegação
-│   ├── Footer.tsx          # Rodapé
-│   ├── ProjectCard.tsx     # Card de projeto com vídeo
-│   └── FloatingActionButton.tsx  # FAB de redes sociais
+│   ├── ui/                 # Componentes reutilizáveis
+│   │   ├── ProjectCard.tsx # Card de projeto com vídeo
+│   │   └── index.ts        # Barrel exports
+│   │
+│   └── sections/           # Seções da página
+│       ├── Home.tsx        # Hero section
+│       ├── Projects.tsx    # Galeria de projetos
+│       ├── Services.tsx    # Serviços oferecidos
+│       ├── Experience.tsx  # Timeline de experiência
+│       └── Contact.tsx     # Formulário de contato
 │
 ├── hooks/                  # Hooks customizados
 │   ├── useScrollReveal.ts  # Animações ScrollReveal
 │   ├── useSmoothScroll.ts  # Scroll suave para âncoras
-│   └── usePhoneFormat.ts   # Formatação de telefone BR
+│   ├── usePhoneFormat.ts   # Formatação de telefone BR
+│   └── useVideoPlayer.ts   # Controle de vídeo (hover/scroll)
 │
 ├── data/                   # Dados estáticos
 │   └── index.ts            # Projetos, serviços, experiências

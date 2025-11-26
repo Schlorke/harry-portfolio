@@ -1,5 +1,7 @@
+'use client'
+
 import Image from 'next/image'
-import { useSmoothScroll } from '../hooks/useSmoothScroll'
+import { useSmoothScroll } from '../../hooks/useSmoothScroll'
 
 const Footer = () => {
   const { handleLinkClick } = useSmoothScroll()

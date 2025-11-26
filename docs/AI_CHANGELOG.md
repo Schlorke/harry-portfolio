@@ -40,10 +40,11 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 ## 📂 Índice de Componentes
 
-### Layout
+### Feature (Layout/Funcionalidades)
 
 - [Header](#header)
 - [Footer](#footer)
+- [FloatingActionButton](#floatingactionbutton)
 
 ### Seções
 
@@ -53,16 +54,16 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 - [Experience](#experience)
 - [Contact](#contact)
 
-### Componentes Reutilizáveis
+### UI (Componentes Reutilizáveis)
 
 - [ProjectCard](#projectcard)
-- [FloatingActionButton](#floatingactionbutton)
 
 ### Hooks
 
 - [useScrollReveal](#usescrollreveal)
 - [useSmoothScroll](#usesmoothscroll)
 - [usePhoneFormat](#usephoneformat)
+- [useVideoPlayer](#usevideoplayer)
 
 ### Utilitários
 
@@ -84,13 +85,13 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 ---
 
-## Layout
+## Feature (Layout/Funcionalidades)
 
 ---
 
 ### Header
 
-**Arquivo:** `src/components/Header.tsx`
+**Arquivo:** `src/components/feature/Header.tsx`
 
 **Estado Atual:**
 
@@ -105,6 +106,21 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 - Classes CSS em `globals.css`
 
 **Histórico de Alterações:**
+
+#### [2025-11-26] Reorganização para components/feature/
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/feature/Header.tsx`
+**Contexto:** Reorganização da estrutura de componentes seguindo padrão ui/feature
+**Detalhes:**
+
+- Movido de `src/components/Header.tsx` para `src/components/feature/Header.tsx`
+- Import atualizado em `page.tsx` para usar exportação do barrel file
+- Nenhuma mudança funcional
+
+**Notas para IAs futuras:**
+
+- Importar via `import { Header } from '../components/feature'`
 
 #### [2025-11-26] Migração para Next.js
 
@@ -129,7 +145,7 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 ### Footer
 
-**Arquivo:** `src/components/Footer.tsx`
+**Arquivo:** `src/components/feature/Footer.tsx`
 
 **Estado Atual:**
 
@@ -144,6 +160,21 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 - RemixIcon (CDN)
 
 **Histórico de Alterações:**
+
+#### [2025-11-26] Reorganização para components/feature/
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/feature/Footer.tsx`
+**Contexto:** Reorganização da estrutura de componentes seguindo padrão ui/feature
+**Detalhes:**
+
+- Movido de `src/components/Footer.tsx` para `src/components/feature/Footer.tsx`
+- Import atualizado em `page.tsx` para usar exportação do barrel file
+- Nenhuma mudança funcional
+
+**Notas para IAs futuras:**
+
+- Importar via `import { Footer } from '../components/feature'`
 
 #### [2025-11-26] Migração para Next.js
 
@@ -353,28 +384,49 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 ---
 
-## Componentes Reutilizáveis
+## UI (Componentes Reutilizáveis)
 
 ---
 
 ### ProjectCard
 
-**Arquivo:** `src/components/ProjectCard.tsx`
+**Arquivo:** `src/components/ui/ProjectCard.tsx`
 
 **Estado Atual:**
 
 - Componente Client (`"use client"`)
 - Card com imagem estática e vídeo on hover/scroll
 - Comportamento diferente para desktop (hover) e mobile (scroll)
-- Desbloqueio de autoplay para iOS
+- Usa hook `useVideoPlayer` para controle de vídeo
+- Desbloqueio de autoplay para iOS (via hook)
 
 **Dependências:**
 
 - `next/image` para imagens
-- `isMobile` util
+- `useVideoPlayer` hook
 - Tipo `Project` de `src/types/index.ts`
 
 **Histórico de Alterações:**
+
+#### [2025-11-26] Refatoração: Extração de lógica para useVideoPlayer
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/ui/ProjectCard.tsx`, `src/hooks/useVideoPlayer.ts`
+**Contexto:** Seguindo boas práticas, extraída lógica de vídeo para hook reutilizável
+**Detalhes:**
+
+- Criado hook `useVideoPlayer` em `src/hooks/useVideoPlayer.ts`
+- Movida toda lógica de Intersection Observer e eventos de hover para o hook
+- Movida lógica de desbloqueio de autoplay iOS para o hook
+- Componente agora consome apenas `{ videoRef, previewRef, isVideoVisible }` do hook
+- Código do componente reduzido de ~176 linhas para ~80 linhas
+- Movido de `src/components/ProjectCard.tsx` para `src/components/ui/ProjectCard.tsx`
+
+**Notas para IAs futuras:**
+
+- Importar via `import { ProjectCard } from '../components/ui'`
+- Lógica de vídeo está no hook `useVideoPlayer`
+- Para modificar comportamento do vídeo, editar o hook, não o componente
 
 #### [2025-11-26] Migração para Next.js
 
@@ -401,7 +453,7 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 ### FloatingActionButton
 
-**Arquivo:** `src/components/FloatingActionButton.tsx`
+**Arquivo:** `src/components/feature/FloatingActionButton.tsx`
 
 **Estado Atual:**
 
@@ -415,6 +467,21 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 - Nenhuma externa (auto-contido)
 
 **Histórico de Alterações:**
+
+#### [2025-11-26] Reorganização para components/feature/
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/feature/FloatingActionButton.tsx`
+**Contexto:** Reorganização da estrutura de componentes seguindo padrão ui/feature
+**Detalhes:**
+
+- Movido de `src/components/FloatingActionButton.tsx` para `src/components/feature/FloatingActionButton.tsx`
+- Import atualizado em `page.tsx` para usar exportação do barrel file
+- Nenhuma mudança funcional
+
+**Notas para IAs futuras:**
+
+- Importar via `import { FloatingActionButton } from '../components/feature'`
 
 #### [2025-11-26] Migração para Next.js
 
@@ -545,6 +612,57 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 - Formato específico para telefones brasileiros
 - Se precisar de outros formatos, considerar biblioteca internacional
 - O hook gerencia seu próprio estado, ideal para forms controlados
+
+---
+
+### useVideoPlayer
+
+**Arquivo:** `src/hooks/useVideoPlayer.ts`
+
+**Estado Atual:**
+
+- Hook Client (`"use client"`)
+- Controla reprodução de vídeo com comportamento adaptativo
+- Desktop: vídeo inicia no hover
+- Mobile: vídeo inicia quando 50% visível (Intersection Observer)
+- Inclui desbloqueio de autoplay para iOS Safari
+
+**Dependências:**
+
+- `isMobile` util de `src/utils/isMobile.ts`
+
+**Retorno:**
+
+```typescript
+{
+  videoRef: RefObject<HTMLVideoElement> // Ref para o elemento video
+  previewRef: RefObject<HTMLAnchorElement> // Ref para o container do preview
+  isVideoVisible: boolean // Estado de visibilidade do vídeo
+  mobile: boolean // Se é dispositivo móvel
+}
+```
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Criação do hook
+
+**Tipo:** `feat`
+**Arquivos:** `src/hooks/useVideoPlayer.ts`
+**Contexto:** Extração de lógica do ProjectCard para hook reutilizável
+**Detalhes:**
+
+- Criado para encapsular lógica complexa de reprodução de vídeo
+- Implementa Intersection Observer para mobile (threshold 0.5)
+- Implementa eventos mouseenter/mouseleave para desktop
+- Inclui desbloqueio de autoplay iOS via touchstart/click
+- Cleanup adequado de observers e event listeners
+
+**Notas para IAs futuras:**
+
+- Este hook é específico para vídeos em cards com preview
+- Para outros casos de vídeo, considere criar hooks específicos
+- O threshold de 0.5 significa que o vídeo inicia quando 50% está visível
+- O desbloqueio de iOS precisa de interação do usuário (touch/click)
 
 ---
 
@@ -715,15 +833,34 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 **Estado Atual:**
 
 - Página principal do portfólio
-- Server Component
-- Composição de Header, Sections e Footer
+- Client Component (`"use client"`)
+- Composição de Header, Sections, Footer e FAB
+- Imports organizados via barrel files
 
 **Dependências:**
 
-- Todos os componentes de seção
-- Header e Footer
+- `src/components/feature` (Header, Footer, FloatingActionButton)
+- `src/components/sections` (Home, Projects, Services, Experience, Contact)
 
 **Histórico de Alterações:**
+
+#### [2025-11-26] Atualização de imports para nova estrutura
+
+**Tipo:** `refactor`
+**Arquivos:** `src/app/page.tsx`
+**Contexto:** Atualização para usar nova estrutura de componentes ui/feature
+**Detalhes:**
+
+- Imports atualizados para usar barrel files
+- `import { Header, Footer, FloatingActionButton } from '../components/feature'`
+- Imports de seções mantidos como estavam
+- Nenhuma mudança funcional
+
+**Notas para IAs futuras:**
+
+- Usar importações via barrel files quando disponíveis
+- Feature components: `../components/feature`
+- UI components: `../components/ui`
 
 #### [2025-11-26] Criação da página
 
@@ -732,7 +869,6 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 **Contexto:** Página principal que compõe todas as seções
 **Detalhes:**
 
-- Server Component (sem `"use client"`)
 - Estrutura: Header → main (seções) → Footer → FAB
 - Seções: Home, Projects, Services, Experience, Contact
 
@@ -786,13 +922,14 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 ## 📊 Estatísticas
 
-| Categoria   | Quantidade | Última Atualização |
-| ----------- | ---------- | ------------------ |
-| Componentes | 8          | 2025-11-26         |
-| Seções      | 5          | 2025-11-26         |
-| Hooks       | 3          | 2025-11-26         |
-| Utilitários | 1          | 2025-11-26         |
-| Tipos       | 4          | 2025-11-26         |
+| Categoria           | Quantidade | Última Atualização |
+| ------------------- | ---------- | ------------------ |
+| Componentes Feature | 3          | 2025-11-26         |
+| Componentes UI      | 1          | 2025-11-26         |
+| Seções              | 5          | 2025-11-26         |
+| Hooks               | 4          | 2025-11-26         |
+| Utilitários         | 1          | 2025-11-26         |
+| Tipos               | 4          | 2025-11-26         |
 
 ---
 

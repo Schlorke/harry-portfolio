@@ -1,6 +1,8 @@
+'use client'
+
 import { memo } from 'react'
 import { projects } from '../../data'
-import ProjectCard from '../ProjectCard'
+import { ProjectCard } from '../ui'
 
 const Projects = memo(() => {
   return (

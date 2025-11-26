@@ -1,6 +1,8 @@
+'use client'
+
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { useSmoothScroll } from '../hooks/useSmoothScroll'
+import { useSmoothScroll } from '../../hooks/useSmoothScroll'
 
 const Header = () => {
   const [isReady, setIsReady] = useState(false)

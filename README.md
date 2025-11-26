@@ -59,10 +59,10 @@ performance, usabilidade e acessibilidade.
 
 ### Core Technologies
 
-- **[Vite 7.1.3](https://vitejs.dev/)** - Build tool e desenvolvimento
-- **[React 18](https://react.dev/)** - Camada de UI e componentes reutilizáveis
+- **[Next.js 16](https://nextjs.org/)** - Framework React com App Router
+- **[React 19](https://react.dev/)** - Camada de UI e componentes reutilizáveis
 - **[TypeScript 5](https://www.typescriptlang.org/)** - Tipagem estática para segurança e manutenção
-- **[Tailwind CSS 3](https://tailwindcss.com/)** - Estilização utilitária com purge JIT
+- **[Tailwind CSS 4](https://tailwindcss.com/)** - Estilização utilitária (prefixo `tw-`)
 
 ### Libraries & APIs
 
@@ -184,43 +184,78 @@ pnpm preview
 
 ```text
 harry-portfolio/
-├── 📁 public/                    # Assets estáticos
+├── 📁 public/                       # Assets estáticos
 │   ├── 📁 assets/
-│   │   ├── 📁 img/              # Imagens, ícones, favicons
-│   │   ├── 📁 videos/           # Vídeos de demonstração
-│   │   └── 📁 pdf/              # Documentos (currículo)
-│   ├── robots.txt               # SEO crawlers
-│   └── sitemap.xml              # Mapa do site
-├── 📁 src/                      # Código fonte
-│   ├── index.html               # Template Vite
-│   ├── main.tsx                 # Entrada React/TypeScript
-│   ├── main.css                 # Tailwind (base/components/utilities)
-│   └── styles.css               # Estilos globais
-├── 📁 docs/                     # Documentação
-├── 📁 .vscode/                  # Configurações VS Code
-├── package.json                 # Dependências e scripts
-├── vite.config.js               # Configuração Vite
-├── eslint.config.js             # Configuração ESLint
-├── cspell.json                  # Configuração spell check
-├── CHANGELOG.md                 # Histórico de mudanças
-├── CONTRIBUTING.md              # Guia de contribuição
-└── README.md                    # Documentação principal
+│   │   ├── 📁 img/                 # Imagens, ícones, favicons
+│   │   ├── 📁 videos/              # Vídeos de demonstração
+│   │   └── 📁 pdf/                 # Documentos (currículo)
+│   ├── robots.txt                  # SEO crawlers
+│   └── sitemap.xml                 # Mapa do site
+│
+├── 📁 src/                         # Código fonte
+│   ├── 📁 app/                     # Next.js App Router
+│   │   ├── globals.css             # Estilos globais e variáveis CSS
+│   │   ├── layout.tsx              # Layout raiz com metadados
+│   │   └── page.tsx                # Página principal
+│   │
+│   ├── 📁 components/              # Componentes React
+│   │   ├── 📁 feature/             # Componentes específicos da aplicação
+│   │   │   ├── Header.tsx          # Cabeçalho e navegação
+│   │   │   ├── Footer.tsx          # Rodapé
+│   │   │   ├── FloatingActionButton.tsx  # FAB de redes sociais
+│   │   │   └── index.ts            # Barrel exports
+│   │   │
+│   │   ├── 📁 ui/                  # Componentes reutilizáveis
+│   │   │   ├── ProjectCard.tsx     # Card de projeto com vídeo
+│   │   │   └── index.ts            # Barrel exports
+│   │   │
+│   │   └── 📁 sections/            # Seções da página
+│   │       ├── Home.tsx            # Hero section
+│   │       ├── Projects.tsx        # Galeria de projetos
+│   │       ├── Services.tsx        # Serviços oferecidos
+│   │       ├── Experience.tsx      # Timeline de experiência
+│   │       └── Contact.tsx         # Formulário de contato
+│   │
+│   ├── 📁 hooks/                   # Hooks customizados
+│   │   ├── useScrollReveal.ts      # Animações ScrollReveal
+│   │   ├── useSmoothScroll.ts      # Scroll suave para âncoras
+│   │   ├── usePhoneFormat.ts       # Formatação de telefone BR
+│   │   └── useVideoPlayer.ts       # Controle de vídeo (hover/scroll)
+│   │
+│   ├── 📁 data/                    # Dados estáticos
+│   │   └── index.ts                # Projetos, serviços, experiências
+│   │
+│   ├── 📁 types/                   # Tipos TypeScript
+│   │   └── index.ts                # Interfaces (Project, Service, etc.)
+│   │
+│   └── 📁 utils/                   # Utilitários
+│       └── isMobile.ts             # Detecção de dispositivo móvel
+│
+├── 📁 docs/                        # Documentação
+├── package.json                    # Dependências e scripts
+├── next.config.mjs                 # Configuração Next.js
+├── tailwind.config.cjs             # Configuração Tailwind CSS
+├── eslint.config.mjs               # Configuração ESLint
+├── AGENTS.md                       # Instruções para agentes IA
+├── CHANGELOG.md                    # Histórico de mudanças
+├── CONTRIBUTING.md                 # Guia de contribuição
+└── README.md                       # Documentação principal
 ```
 
 ## ⚙️ Configuração
 
 ### Variáveis de Ambiente
 
-Crie um arquivo `.env` na raiz do projeto:
+Crie um arquivo `.env.local` na raiz do projeto:
 
 ```env
 # EmailJS Configuration
-VITE_EMAILJS_SERVICE_ID=your_service_id
-VITE_EMAILJS_TEMPLATE_ID=your_template_id
-VITE_EMAILJS_PUBLIC_KEY=your_public_key
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
 
 # Google Analytics (opcional)
-VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
 ### Configuração do EmailJS

@@ -1,13 +1,29 @@
-import Image from 'next/image'
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
-import { Project } from '../types'
 import { isMobile } from '../utils/isMobile'
 
-interface ProjectCardProps {
-  project: Project
-}
-
-const ProjectCard = ({ project }: ProjectCardProps) => {
+/**
+ * Hook para controlar reprodução de vídeo com comportamento diferente para desktop e mobile.
+ *
+ * - Desktop: Vídeo inicia no hover do elemento preview
+ * - Mobile: Vídeo inicia quando 50% do elemento está visível (Intersection Observer)
+ * - iOS: Inclui desbloqueio de autoplay no primeiro touch/click
+ *
+ * @returns Objeto com refs para vídeo e preview, estado de visibilidade e flag mobile
+ *
+ * @example
+ * ```tsx
+ * const { videoRef, previewRef, isVideoVisible, mobile } = useVideoPlayer()
+ *
+ * return (
+ *   <a ref={previewRef} className={isVideoVisible ? 'video-visible' : ''}>
+ *     <video ref={videoRef} src="/video.mp4" muted loop />
+ *   </a>
+ * )
+ * ```
+ */
+export const useVideoPlayer = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const previewRef = useRef<HTMLAnchorElement>(null)
   const [isVideoVisible, setIsVideoVisible] = useState(false)
@@ -27,7 +43,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       video.setAttribute('preload', 'auto')
       video.removeAttribute('controls')
 
-      // Intersection Observer para mobile
+      // Intersection Observer para mobile - inicia vídeo quando 50% visível
       const observer = new IntersectionObserver(
         entries => {
           entries.forEach(entry => {
@@ -54,7 +70,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 
       observer.observe(video)
 
-      // Desbloquear autoplay em iOS
+      // Desbloquear autoplay em iOS Safari
+      // iOS requer interação do usuário antes de permitir autoplay
       const unlockAutoplay = () => {
         video
           .play()
@@ -109,67 +126,12 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     }
   }, [mobile])
 
-  return (
-    <article className='projects__card'>
-      <a
-        ref={previewRef}
-        href={project.url}
-        target='_blank'
-        rel='noopener noreferrer'
-        className={`projects__image video-preview ${isVideoVisible ? 'video-visible' : ''}`}
-      >
-        <Image
-          src={project.image}
-          width={320}
-          height={210}
-          loading='lazy'
-          alt={project.name}
-          title={`Projeto: ${project.name}`}
-          className='projects__img'
-        />
-
-        {project.video && (
-          <video
-            ref={videoRef}
-            src={project.video}
-            className='projects__video'
-            muted
-            data-playsinline='true'
-            preload='auto'
-            loop
-          />
-        )}
-      </a>
-
-      <div className='projects__data'>
-        <h3 className='projects__name'>{project.name}</h3>
-        <p className='projects__description'>{project.description}</p>
-        <div className='projects__skills'>
-          {project.skills.map((skill, index) => (
-            <img
-              key={index}
-              src={skill}
-              width={24}
-              height={24}
-              alt={`Skill ${index}`}
-              className='projects__skill'
-              loading='lazy'
-            />
-          ))}
-        </div>
-
-        <a
-          href={project.url}
-          target='_blank'
-          rel='noopener noreferrer'
-          className='projects__button'
-        >
-          <i className='ri-link'></i>
-          <span>Visitar Site</span>
-        </a>
-      </div>
-    </article>
-  )
+  return {
+    videoRef,
+    previewRef,
+    isVideoVisible,
+    mobile
+  }
 }
 
-export default ProjectCard
+export default useVideoPlayer
