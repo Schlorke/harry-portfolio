@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Alegreya_Sans_SC, Poppins } from 'next/font/google'
 import Script from 'next/script'
-import { projects } from '../data'
 import './globals.css'
 
 // Otimização de fontes com next/font
@@ -20,10 +19,6 @@ const alegreyaSansSC = Alegreya_Sans_SC({
   variable: '--second-font',
   preload: true
 })
-
-const projectVideos = projects
-  .map(project => project.video)
-  .filter((video): video is string => Boolean(video))
 
 export const metadata: Metadata = {
   title: 'Harry Schlorke - Desenvolvedor Full-Stack',
@@ -92,17 +87,7 @@ export default function RootLayout({
           `}
         </Script>
         <link rel='preload' as='image' href='/assets/img/Background.png' />
-        <link rel='preload' as='image' href='/assets/img/Harry-Schlorke.png' />
-        {projectVideos.map(video => (
-          <link
-            key={video}
-            rel='preload'
-            as='video'
-            href={video}
-            type='video/mp4'
-            crossOrigin='anonymous'
-          />
-        ))}
+        {/* Vídeos preloaded apenas quando necessário (on hover/scroll) */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://cdn.jsdelivr.net' crossOrigin='' />
         <link

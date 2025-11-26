@@ -152,6 +152,86 @@ Este comportamento ocorre **apenas em desenvolvimento** devido ao Strict Mode. E
 
 ---
 
+## Warnings do Next.js Image sobre Aspect Ratio
+
+- **ID da Issue:** N/A
+- **Severidade:** Baixa
+- **Status:** Resolvido
+- **Versões Afetadas:** Todas
+- **Data do Relato:** 2025-11-26
+- **Última Atualização:** 2025-11-26
+
+### Descrição
+
+O Next.js emite warnings quando o componente `Image` tem dimensões definidas mas o CSS modifica apenas uma delas
+(width ou height), potencialmente causando distorção de aspect ratio.
+
+### Mensagem de Warning
+
+```text
+Image with src "/assets/img/Home-Harry.webp" has either width or height modified,
+but not the other. If you use CSS to change the size of your image, also include
+the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+```
+
+### Solução
+
+Adicionar `style={{ height: 'auto' }}` ou `style={{ width: 'auto' }}` no componente `Image` quando o CSS
+modifica apenas uma dimensão:
+
+```tsx
+<Image
+  src='/assets/img/Home-Harry.webp'
+  width={304}
+  height={415}
+  style={{ height: 'auto' }} // Mantém aspect ratio quando CSS modifica width
+  className='perfil__img'
+/>
+```
+
+### Notas Adicionais
+
+Este é um warning informativo que não afeta a funcionalidade, apenas alerta sobre possível distorção de
+imagem. A correção garante que o aspect ratio seja mantido corretamente.
+
+---
+
+## Warnings de Preload de Recursos
+
+- **ID da Issue:** N/A
+- **Severidade:** Baixa
+- **Status:** Resolvido
+- **Versões Afetadas:** Todas
+- **Data do Relato:** 2025-11-26
+- **Última Atualização:** 2025-11-26
+
+### Descrição
+
+Warnings do navegador sobre recursos preloaded que não foram usados imediatamente ou sobre valores `as` não
+suportados em `<link rel="preload">`.
+
+### Tipos de Warnings
+
+1. **`<link rel=preload> uses an unsupported 'as' value`**
+   - Alguns navegadores não suportam `as='video'` para preload
+   - Solução: Remover preload de vídeos (carregam sob demanda)
+
+2. **`The resource was preloaded using link preload but not used within a few seconds`**
+   - Recursos preloaded que não são usados imediatamente
+   - Pode ocorrer se o preload acontece antes do componente renderizar
+
+### Solução Implementada
+
+- Removido preload de vídeos (carregam sob demanda no hover/scroll)
+- Mantidos apenas preloads de recursos críticos (Background.png)
+
+### Notas Adicionais
+
+Estes warnings não afetam a funcionalidade do site. Os vídeos continuam carregando normalmente quando
+necessário (on hover desktop ou on scroll mobile).
+
+---
+
 ## Template para Novos Issues
 
 Copie e preencha o template abaixo ao documentar um novo issue:

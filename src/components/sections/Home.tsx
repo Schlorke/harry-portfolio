@@ -20,6 +20,7 @@ const Home = () => {
             alt='Foto de Harry Schlorke com fundo transparente, desenvolvedor full-stack'
             title='Harry Schlorke - Desenvolvedor Full-Stack'
             className='perfil__img'
+            style={{ height: 'auto' }}
           />
 
           <div className='perfil__data'>
@@ -31,6 +32,7 @@ const Home = () => {
               alt='Logotipo com nome Harry Schlorke'
               title='Harry Schlorke'
               className='perfil__logo'
+              style={{ height: 'auto' }}
             />
             <span className='perfil__subtitle'>FULL-STACK DEVELOPER</span>
 

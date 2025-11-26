@@ -1,6 +1,7 @@
+import { memo } from 'react'
 import { experiences } from '../../data'
 
-const Experience = () => {
+const Experience = memo(() => {
   return (
     <section className='experience section' id='Experiência'>
       <h2 className='section__title'>EXPERIÊNCIA</h2>
@@ -24,6 +25,7 @@ const Experience = () => {
       </div>
     </section>
   )
-}
+})
 
+Experience.displayName = 'Experience'
 export default Experience

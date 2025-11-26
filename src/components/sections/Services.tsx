@@ -1,6 +1,7 @@
+import { memo } from 'react'
 import { services } from '../../data'
 
-const Services = () => {
+const Services = memo(() => {
   return (
     <section className='services section' id='Serviços'>
       <h2 className='section__title'>SERVIÇOS</h2>
@@ -20,6 +21,7 @@ const Services = () => {
       </div>
     </section>
   )
-}
+})
 
+Services.displayName = 'Services'
 export default Services
