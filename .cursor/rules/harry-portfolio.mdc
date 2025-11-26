@@ -1,0 +1,122 @@
+---
+alwaysApply: true
+---
+
+<!-- markdownlint-disable MD025 -->
+
+# Cursor Rules - Harry Portfolio
+
+> **📋 IMPORTANTE:** Este arquivo fornece contexto básico. Para regras completas, consulte `AGENTS.md`.
+
+## 🎯 Sobre o Projeto
+
+**Harry Portfolio** é um portfólio profissional desenvolvido com:
+
+- Next.js 14.2.15 (App Router)
+- React 18.2.0
+- TypeScript 5.3.3
+- Tailwind CSS 3.4.1 (prefixo: `tw-`)
+
+## ⚠️ Regras Críticas
+
+### ANTES de Modificar Código (PRO - Protocolo de Leitura Obrigatória)
+
+1. **SEMPRE leia** `AGENTS.md` - Regras completas do projeto
+
+2. **SEMPRE leia** `docs/AI_CHANGELOG.md` - Histórico de alterações por componente
+
+3. **SEMPRE leia** `CHANGELOG.md` [Unreleased] - Mudanças recentes
+
+4. Leia documentação de referência relevante em `docs/2_REFERENCE/`
+
+### APÓS Modificar Código (PRA - Protocolo de Registro de Alterações)
+
+1. **SEMPRE atualize** `docs/AI_CHANGELOG.md` com detalhes da alteração
+2. **SEMPRE atualize** `CHANGELOG.md` seção `[Unreleased]`
+3. Se mudou estrutura do projeto, atualize `README.md` (seção "📁 Estrutura do Projeto")
+4. Se corrigiu bug, atualize `docs/KNOWN_ISSUES.md`
+
+## ✅ Do (Faça)
+
+- Use **App Router** do Next.js (`src/app/`)
+- Use **TypeScript** com tipagem estrita (evite `any`)
+- Use **componentes funcionais** e hooks (componentes de classe são proibidos)
+- Use **Server Components** por padrão, `"use client"` apenas quando necessário
+- Use `next/image` para todas as imagens
+- Use prefixo `tw-` para classes Tailwind
+- Execute `pnpm format` e `pnpm lint` antes de finalizar
+
+## ❌ Don't (Não Faça)
+
+- Não use o `pages/` Router (projeto usa App Router)
+- Não instale dependências sem aprovação
+- Não remova classes CSS existentes sem entender impacto
+- Não use CSS-in-JS (styled-components, Emotion, etc.)
+- Não faça hard-code de URLs de assets
+
+## 📂 Estrutura de Componentes
+
+```text
+src/
+├── app/                    # Next.js App Router
+├── components/             # Componentes React
+│   ├── sections/           # Seções da página
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   └── ...
+├── hooks/                  # Hooks customizados
+├── data/                   # Dados estáticos
+├── types/                  # Tipos TypeScript
+└── utils/                  # Utilitários
+```
+
+## 🔄 Fluxo de Trabalho Obrigatório
+
+1. **RECEBER TAREFA** → Identificar componentes afetados
+2. **FASE DE LEITURA (PRO)** → Ler documentação relevante
+3. **FASE DE ANÁLISE** → Entender estado atual e planejar
+4. **FASE DE IMPLEMENTAÇÃO** → Executar alterações
+5. **FASE DE REGISTRO (PRA)** → Documentar mudanças
+6. **VALIDAÇÃO FINAL** → Confirmar regras seguidas
+
+## 📚 Documentação Essencial
+
+- **Regras Completas:** `AGENTS.md` ⭐ **LEIA PRIMEIRO**
+- **Histórico de Componentes:** `docs/AI_CHANGELOG.md` ⭐ **LEIA ANTES DE MODIFICAR**
+- **Changelog:** `CHANGELOG.md`
+- **Arquitetura:** `docs/2_REFERENCE/1_arquitetura.md`
+- **Componentes:** `docs/2_REFERENCE/3_componentes-ui.md`
+- **Hooks:** `docs/2_REFERENCE/4_hooks.md`
+
+## 🎨 Convenções
+
+- **CSS:** Variáveis CSS em `globals.css`, Tailwind com prefixo `tw-`
+- **Fontes:** Poppins (principal), Alegreya Sans SC (títulos)
+- **Nomenclatura:** BEM para CSS, camelCase para JS/TS
+- **Imports:** Next.js → React → Tipos → Hooks → Utils
+
+## 🛠️ Comandos Úteis
+
+```bash
+# Desenvolvimento
+pnpm dev
+
+# Build produção
+pnpm build
+
+# Verificar código
+pnpm lint
+
+# Formatar código
+pnpm format
+
+# Verificar tipos
+pnpm type-check
+```
+
+## ⚠️ Lembrete Final
+
+**NUNCA pule as fases de Leitura (PRO) e Registro (PRA).**
+O arquivo `docs/AI_CHANGELOG.md` é a memória coletiva das IAs - trate-o com cuidado.
+
+Para regras completas e detalhadas, consulte: **`AGENTS.md`**

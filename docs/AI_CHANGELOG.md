@@ -1,0 +1,811 @@
+# AI Changelog - Registro de Alterações por Componente
+
+> **📋 Propósito:** Este documento é a **memória coletiva** das IAs que trabalham neste projeto.
+> Ele registra todas as alterações feitas em componentes, hooks e utilitários, fornecendo
+> contexto histórico para futuras modificações.
+>
+> **⚠️ OBRIGATÓRIO:** Toda IA deve ler este documento ANTES de modificar código e atualizá-lo DEPOIS.
+
+---
+
+## 📖 Como Usar Este Documento
+
+### Para IAs (Leitura)
+
+1. **ANTES de modificar qualquer componente**, encontre a seção correspondente neste documento
+2. Leia o histórico de alterações para entender o contexto
+3. Observe as notas deixadas por IAs anteriores
+4. Entenda o estado atual e as decisões tomadas
+
+### Para IAs (Escrita)
+
+Após fazer alterações, adicione uma nova entrada na seção do componente modificado:
+
+```markdown
+### [YYYY-MM-DD] Descrição breve da alteração
+
+**Tipo:** `feat` | `fix` | `refactor` | `style` | `perf` | `docs`
+**Arquivos:** Lista de arquivos modificados
+**Contexto:** Por que a alteração foi feita
+**Detalhes:**
+
+- O que foi alterado
+- Como funciona agora
+- Impactos em outros componentes (se houver)
+
+**Notas para IAs futuras:** Informações importantes para contexto
+```
+
+---
+
+## 📂 Índice de Componentes
+
+### Layout
+
+- [Header](#header)
+- [Footer](#footer)
+
+### Seções
+
+- [Home](#home)
+- [Projects](#projects)
+- [Services](#services)
+- [Experience](#experience)
+- [Contact](#contact)
+
+### Componentes Reutilizáveis
+
+- [ProjectCard](#projectcard)
+- [FloatingActionButton](#floatingactionbutton)
+
+### Hooks
+
+- [useScrollReveal](#usescrollreveal)
+- [useSmoothScroll](#usesmoothscroll)
+- [usePhoneFormat](#usephoneformat)
+
+### Utilitários
+
+- [isMobile](#ismobile)
+
+### Dados
+
+- [data/index.ts](#dataindexts)
+
+### Tipos
+
+- [types/index.ts](#typesindexts)
+
+### Configuração
+
+- [layout.tsx](#layouttsx)
+- [page.tsx](#pagetsx)
+- [globals.css](#globalscss)
+
+---
+
+## Layout
+
+---
+
+### Header
+
+**Arquivo:** `src/components/Header.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- Navegação principal com links para seções
+- Menu hamburger para mobile
+- Animações de entrada com CSS
+
+**Dependências:**
+
+- `useSmoothScroll` hook
+- Classes CSS em `globals.css`
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração para Next.js
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/Header.tsx`
+**Contexto:** Migração do projeto de Vite/Vanilla JS para Next.js 14
+**Detalhes:**
+
+- Convertido de JavaScript vanilla para React/TypeScript
+- Adicionado `"use client"` para interatividade
+- Implementado estados com `useState` para controle de menu e animações
+- Integrado hook `useSmoothScroll` para navegação suave
+- Mantidas todas as animações CSS originais
+
+**Notas para IAs futuras:**
+
+- O header tem animação de entrada que depende de timing específico
+- Estados `isReady`, `isAnimated`, `isNavVisible` controlam a sequência de animação
+- Menu mobile usa estado `isMobileMenuOpen`
+
+---
+
+### Footer
+
+**Arquivo:** `src/components/Footer.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- Links para redes sociais
+- Copyright e informações de contato
+- Link para voltar ao topo
+
+**Dependências:**
+
+- `useSmoothScroll` hook
+- RemixIcon (CDN)
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração para Next.js
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/Footer.tsx`
+**Contexto:** Migração do projeto de Vite/Vanilla JS para Next.js 14
+**Detalhes:**
+
+- Convertido para componente React funcional com TypeScript
+- Integrado hook `useSmoothScroll` para link de voltar ao topo
+- Mantida estrutura visual e links sociais
+
+**Notas para IAs futuras:**
+
+- Links sociais são hardcoded no componente
+- Ícones usam RemixIcon via CDN (carregado no layout)
+
+---
+
+## Seções
+
+---
+
+### Home
+
+**Arquivo:** `src/components/sections/Home.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- Seção hero com foto de perfil
+- Informações pessoais e skills
+- CTAs para download de currículo e contato
+
+**Dependências:**
+
+- `useScrollReveal` hook
+- `useSmoothScroll` hook
+- `next/image` para imagens
+- Dados de `skills` em `src/data/index.ts`
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração para Next.js
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/sections/Home.tsx`
+**Contexto:** Migração do projeto de Vite/Vanilla JS para Next.js 14
+**Detalhes:**
+
+- Convertido para componente React funcional com TypeScript
+- Imagens migradas para `next/image` com otimização
+- Skills movidos para `src/data/index.ts`
+- Integrados hooks `useScrollReveal` e `useSmoothScroll`
+- Adicionado `style={{ height: 'auto' }}` para manter aspect ratio das imagens
+
+**Notas para IAs futuras:**
+
+- A foto de perfil tem animação CSS circular
+- Skills são renderizados dinamicamente do arquivo de dados
+- O botão de download abre o currículo em nova aba
+
+---
+
+### Projects
+
+**Arquivo:** `src/components/sections/Projects.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- Grid de projetos usando `ProjectCard`
+- Animações ScrollReveal nos cards
+
+**Dependências:**
+
+- `useScrollReveal` hook
+- `ProjectCard` componente
+- Dados de `projects` em `src/data/index.ts`
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração para Next.js
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/sections/Projects.tsx`
+**Contexto:** Migração do projeto de Vite/Vanilla JS para Next.js 14
+**Detalhes:**
+
+- Convertido para componente React funcional
+- Projetos movidos para arquivo de dados centralizado
+- Cada projeto usa o componente `ProjectCard`
+
+**Notas para IAs futuras:**
+
+- Projetos são definidos em `src/data/index.ts`
+- Para adicionar novo projeto, editar apenas o arquivo de dados
+- A ordem no array define a ordem de exibição
+
+---
+
+### Services
+
+**Arquivo:** `src/components/sections/Services.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- Cards de serviços oferecidos
+- Animações ScrollReveal
+
+**Dependências:**
+
+- `useScrollReveal` hook
+- Dados de `services` em `src/data/index.ts`
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração para Next.js
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/sections/Services.tsx`
+**Contexto:** Migração do projeto de Vite/Vanilla JS para Next.js 14
+**Detalhes:**
+
+- Convertido para componente React funcional
+- Serviços movidos para arquivo de dados
+
+**Notas para IAs futuras:**
+
+- Ícones usam RemixIcon (classes `ri-*`)
+- Cada serviço tem: name, icon, description
+
+---
+
+### Experience
+
+**Arquivo:** `src/components/sections/Experience.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- Timeline de experiências profissionais
+- Animações ScrollReveal
+
+**Dependências:**
+
+- `useScrollReveal` hook
+- Dados de `experiences` em `src/data/index.ts`
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração para Next.js
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/sections/Experience.tsx`
+**Contexto:** Migração do projeto de Vite/Vanilla JS para Next.js 14
+**Detalhes:**
+
+- Convertido para componente React funcional
+- Experiências movidas para arquivo de dados
+
+**Notas para IAs futuras:**
+
+- Timeline usa CSS customizado para linha conectora
+- Experiências devem estar em ordem cronológica reversa (mais recente primeiro)
+
+---
+
+### Contact
+
+**Arquivo:** `src/components/sections/Contact.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- Formulário de contato com validação
+- Integração com EmailJS
+- Estados de loading, success, error
+
+**Dependências:**
+
+- `useScrollReveal` hook
+- `usePhoneFormat` hook
+- `emailjs-com` biblioteca
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração para Next.js
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/sections/Contact.tsx`
+**Contexto:** Migração do projeto de Vite/Vanilla JS para Next.js 14
+**Detalhes:**
+
+- Convertido para componente React funcional com TypeScript
+- Implementado estado de formulário com `useState`
+- Integrado hook `usePhoneFormat` para formatação de telefone
+- Variáveis de ambiente movidas para `NEXT_PUBLIC_*`
+
+**Notas para IAs futuras:**
+
+- Credenciais EmailJS em variáveis de ambiente
+- Campo de telefone tem formatação automática BR
+- Estados do formulário: 'idle', 'loading', 'success', 'error'
+- Ver `docs/1_HOW_TO_GUIDES/2_configurar-emailjs.md` para configuração
+
+---
+
+## Componentes Reutilizáveis
+
+---
+
+### ProjectCard
+
+**Arquivo:** `src/components/ProjectCard.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- Card com imagem estática e vídeo on hover/scroll
+- Comportamento diferente para desktop (hover) e mobile (scroll)
+- Desbloqueio de autoplay para iOS
+
+**Dependências:**
+
+- `next/image` para imagens
+- `isMobile` util
+- Tipo `Project` de `src/types/index.ts`
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração para Next.js
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/ProjectCard.tsx`
+**Contexto:** Migração do projeto de Vite/Vanilla JS para Next.js 14
+**Detalhes:**
+
+- Convertido para componente React funcional com TypeScript
+- Implementado Intersection Observer para mobile
+- Adicionado desbloqueio de autoplay para iOS Safari
+- Props tipadas com interface `Project`
+- Imagens usando `next/image`
+
+**Notas para IAs futuras:**
+
+- **IMPORTANTE:** iOS Safari tem política restritiva de autoplay
+- O desbloqueio de autoplay acontece no primeiro touch/click da página
+- Desktop: vídeo inicia no hover
+- Mobile: vídeo inicia quando 50% do card está visível
+- Ver `docs/KNOWN_ISSUES.md` para detalhes sobre autoplay em iOS
+
+---
+
+### FloatingActionButton
+
+**Arquivo:** `src/components/FloatingActionButton.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- FAB que expande para mostrar links sociais
+- Animação staggered nos links
+- Overlay de fundo quando aberto
+
+**Dependências:**
+
+- Nenhuma externa (auto-contido)
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração para Next.js
+
+**Tipo:** `refactor`
+**Arquivos:** `src/components/FloatingActionButton.tsx`
+**Contexto:** Migração do projeto de Vite/Vanilla JS para Next.js 14
+**Detalhes:**
+
+- Convertido para componente React funcional com TypeScript
+- Estados `isActive` e `animationComplete` para controle de UI
+- Links sociais definidos internamente como array
+
+**Notas para IAs futuras:**
+
+- Links sociais estão hardcoded no componente
+- Animação de entrada usa setTimeout para sequência
+- Overlay fecha o FAB ao ser clicado
+
+---
+
+## Hooks
+
+---
+
+### useScrollReveal
+
+**Arquivo:** `src/hooks/useScrollReveal.ts`
+
+**Estado Atual:**
+
+- Hook de efeito colateral (void return)
+- Inicializa ScrollReveal para elementos específicos
+- SSR-safe com verificação de `window`
+- Cleanup implementado
+
+**Dependências:**
+
+- `scrollreveal` biblioteca (import dinâmico)
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Criação do hook
+
+**Tipo:** `feat`
+**Arquivos:** `src/hooks/useScrollReveal.ts`
+**Contexto:** Encapsular lógica de ScrollReveal em hook reutilizável
+**Detalhes:**
+
+- Import dinâmico para evitar erros SSR
+- Tipagem customizada para ScrollReveal (biblioteca sem tipos)
+- Configurações padrão: origin 'top', distance '60px', duration 2500ms
+- Elementos animados: `.perfil`, `.info`, `.skills`, `.about`, `.contact__form`, cards
+
+**Notas para IAs futuras:**
+
+- ScrollReveal não tem tipos oficiais TypeScript
+- Tipos são definidos inline no hook
+- Em Strict Mode do React, pode executar 2x em dev (normal)
+- Ver `docs/KNOWN_ISSUES.md` para comportamento em Strict Mode
+
+---
+
+### useSmoothScroll
+
+**Arquivo:** `src/hooks/useSmoothScroll.ts`
+
+**Estado Atual:**
+
+- Hook que retorna `handleLinkClick`
+- Função utilitária `smoothScrollTo` exportada separadamente
+- Offset padrão de 100px do topo
+
+**Dependências:**
+
+- Nenhuma externa
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Criação do hook
+
+**Tipo:** `feat`
+**Arquivos:** `src/hooks/useSmoothScroll.ts`
+**Contexto:** Abstrair lógica de scroll suave para reutilização
+**Detalhes:**
+
+- `smoothScrollTo(targetId, offset)` - função utilitária
+- `useSmoothScroll()` - hook que retorna handler para onClick
+- Offset padrão considera espaço para o header
+
+**Notas para IAs futuras:**
+
+- O offset de 100px foi calibrado para o header atual
+- Se o header mudar de altura, pode ser necessário ajustar
+- A função `smoothScrollTo` pode ser usada fora de componentes React
+
+---
+
+### usePhoneFormat
+
+**Arquivo:** `src/hooks/usePhoneFormat.ts`
+
+**Estado Atual:**
+
+- Hook com estado interno para valor formatado
+- Formatação automática para telefone brasileiro
+- Bloqueia entrada de não-números
+- Limite de 11 dígitos
+
+**Dependências:**
+
+- Nenhuma externa
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Criação do hook
+
+**Tipo:** `feat`
+**Arquivos:** `src/hooks/usePhoneFormat.ts`
+**Contexto:** Abstrair formatação de telefone para formulário de contato
+**Detalhes:**
+
+- Formato: `(XX) X XXXX-XXXX`
+- Função `formatPhoneNumber` exportada para uso standalone
+- `handleKeyPress` previne entrada de caracteres não numéricos
+
+**Notas para IAs futuras:**
+
+- Formato específico para telefones brasileiros
+- Se precisar de outros formatos, considerar biblioteca internacional
+- O hook gerencia seu próprio estado, ideal para forms controlados
+
+---
+
+## Utilitários
+
+---
+
+### isMobile
+
+**Arquivo:** `src/utils/isMobile.ts`
+
+**Estado Atual:**
+
+- Função utilitária que detecta dispositivo móvel
+- Baseado em User Agent
+- SSR-safe
+
+**Dependências:**
+
+- Nenhuma
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Criação do utilitário
+
+**Tipo:** `feat`
+**Arquivos:** `src/utils/isMobile.ts`
+**Contexto:** Detectar dispositivo para comportamentos diferentes em ProjectCard
+**Detalhes:**
+
+- Verifica `navigator.userAgent` para padrões mobile
+- Retorna `false` se `window` não existe (SSR)
+- Usado para decidir entre hover (desktop) e scroll (mobile)
+
+**Notas para IAs futuras:**
+
+- Detecção por User Agent não é 100% confiável
+- Para casos críticos, considerar media queries ou touch events
+- Atualmente usado apenas em `ProjectCard`
+
+---
+
+## Dados
+
+---
+
+### data/index.ts
+
+**Arquivo:** `src/data/index.ts`
+
+**Estado Atual:**
+
+- Arrays de dados estáticos
+- `projects`: Projetos do portfólio
+- `services`: Serviços oferecidos
+- `experiences`: Experiências profissionais
+- `skills`: Habilidades técnicas
+
+**Dependências:**
+
+- Tipos de `src/types/index.ts`
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Criação do arquivo de dados
+
+**Tipo:** `feat`
+**Arquivos:** `src/data/index.ts`
+**Contexto:** Centralizar dados estáticos do portfólio
+**Detalhes:**
+
+- Migrados dados que estavam inline nos componentes
+- Tipagem com interfaces de `src/types/index.ts`
+- Facilita manutenção e adição de novos itens
+
+**Notas para IAs futuras:**
+
+- Para adicionar projeto: adicionar objeto ao array `projects`
+- Para adicionar serviço: adicionar objeto ao array `services`
+- Manter consistência com tipos definidos
+- Imagens devem existir em `/public/assets/`
+
+---
+
+## Tipos
+
+---
+
+### types/index.ts
+
+**Arquivo:** `src/types/index.ts`
+
+**Estado Atual:**
+
+- Interfaces TypeScript para dados do projeto
+- `Project`, `Service`, `Experience`, `Skill`
+
+**Dependências:**
+
+- Nenhuma
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Criação dos tipos
+
+**Tipo:** `feat`
+**Arquivos:** `src/types/index.ts`
+**Contexto:** Definir contratos de tipos para dados do projeto
+**Detalhes:**
+
+- `Project`: name, description, image, video?, url, skills
+- `Service`: name, icon, description
+- `Experience`: company, profession, date, description
+- `Skill`: name, icon
+
+**Notas para IAs futuras:**
+
+- Manter tipos sincronizados com dados em `src/data/index.ts`
+- Campos opcionais marcados com `?`
+- Usar estas interfaces em props de componentes
+
+---
+
+## Configuração
+
+---
+
+### layout.tsx
+
+**Arquivo:** `src/app/layout.tsx`
+
+**Estado Atual:**
+
+- Layout raiz do Next.js
+- Metadata para SEO
+- Carregamento de fontes (Poppins, Alegreya Sans SC)
+- Link para RemixIcon CDN
+
+**Dependências:**
+
+- `next/font/google`
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Criação do layout
+
+**Tipo:** `feat`
+**Arquivos:** `src/app/layout.tsx`
+**Contexto:** Configurar layout raiz com metadados e fontes
+**Detalhes:**
+
+- Fontes carregadas via `next/font` para otimização
+- Metadata inclui Open Graph e Twitter Cards
+- RemixIcon via CDN (link externo)
+
+**Notas para IAs futuras:**
+
+- Fontes usam variáveis CSS (`--font-poppins`, `--font-alegreya`)
+- Metadata é estática (não dinâmica)
+- RemixIcon pode ser internalizado futuramente para melhor performance
+
+---
+
+### page.tsx
+
+**Arquivo:** `src/app/page.tsx`
+
+**Estado Atual:**
+
+- Página principal do portfólio
+- Server Component
+- Composição de Header, Sections e Footer
+
+**Dependências:**
+
+- Todos os componentes de seção
+- Header e Footer
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Criação da página
+
+**Tipo:** `feat`
+**Arquivos:** `src/app/page.tsx`
+**Contexto:** Página principal que compõe todas as seções
+**Detalhes:**
+
+- Server Component (sem `"use client"`)
+- Estrutura: Header → main (seções) → Footer → FAB
+- Seções: Home, Projects, Services, Experience, Contact
+
+**Notas para IAs futuras:**
+
+- Ordem das seções importa para navegação
+- IDs das seções são usados para scroll suave
+- FAB fica fora do main para posicionamento fixo
+
+---
+
+### globals.css
+
+**Arquivo:** `src/app/globals.css`
+
+**Estado Atual:**
+
+- Estilos globais do projeto
+- Variáveis CSS customizadas
+- Classes BEM para componentes
+- Media queries responsivas
+- Animações CSS
+
+**Dependências:**
+
+- Nenhuma
+
+**Histórico de Alterações:**
+
+#### [2025-11-26] Migração de estilos
+
+**Tipo:** `refactor`
+**Arquivos:** `src/app/globals.css`
+**Contexto:** Migrar estilos do projeto Vite para Next.js
+**Detalhes:**
+
+- Mantidos todos os estilos originais
+- Variáveis CSS em `:root`
+- Cor principal: hue 358 (vermelho)
+- Breakpoints: 320px, 540px, 768px, 1200px, 1500px
+
+**Notas para IAs futuras:**
+
+- **CUIDADO:** Este arquivo tem ~1500 linhas
+- Não remover classes sem entender impacto
+- Variáveis CSS são a fonte de verdade para cores
+- Tailwind usa prefixo `tw-` para evitar conflitos
+- Ver `docs/2_REFERENCE/5_design-system.md` para detalhes
+
+---
+
+## 📊 Estatísticas
+
+| Categoria   | Quantidade | Última Atualização |
+| ----------- | ---------- | ------------------ |
+| Componentes | 8          | 2025-11-26         |
+| Seções      | 5          | 2025-11-26         |
+| Hooks       | 3          | 2025-11-26         |
+| Utilitários | 1          | 2025-11-26         |
+| Tipos       | 4          | 2025-11-26         |
+
+---
+
+## 📝 Notas Gerais para IAs
+
+1. **Padrão de nomenclatura:** BEM para CSS, camelCase para JS/TS
+2. **Componentes Client:** Usar `"use client"` apenas quando necessário
+3. **Imagens:** Sempre usar `next/image` com dimensões explícitas
+4. **Dados:** Centralizar em `src/data/index.ts`, nunca inline
+5. **Tipos:** Definir em `src/types/index.ts`, usar em props
+6. **CSS:** Preferir classes existentes, Tailwind com prefixo `tw-`
+7. **Hooks:** Implementar cleanup em useEffect, verificar SSR
+
+---
+
+**Última atualização:** 26 de Novembro de 2025

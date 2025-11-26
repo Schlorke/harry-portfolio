@@ -244,6 +244,147 @@ import { isMobile } from '../utils/isMobile' // 5. Utils locais
 
 ---
 
+## 📖 Protocolo de Leitura Obrigatória (PRO)
+
+**ANTES de executar qualquer alteração em código**, a IA deve obrigatoriamente ler os documentos relevantes para obter
+contexto completo sobre o projeto e os componentes afetados.
+
+### Leitura Obrigatória (Sempre)
+
+1. **`AGENTS.md`** - Regras e padrões do projeto (este arquivo)
+2. **`CHANGELOG.md`** - Histórico de mudanças recentes (seção `[Unreleased]`)
+3. **`docs/AI_CHANGELOG.md`** - Registro de alterações por componente
+
+### Leitura Contextual (Baseada na Tarefa)
+
+| Tipo de Tarefa            | Documentos Adicionais                                                               |
+| ------------------------- | ----------------------------------------------------------------------------------- |
+| Modificar componentes UI  | `docs/2_REFERENCE/3_componentes-ui.md`, `docs/AI_CHANGELOG.md`                      |
+| Modificar hooks           | `docs/2_REFERENCE/4_hooks.md`, `docs/AI_CHANGELOG.md`                               |
+| Alterar estilos           | `docs/2_REFERENCE/5_design-system.md`                                               |
+| Mudar arquitetura         | `docs/2_REFERENCE/1_arquitetura.md`, `docs/3_EXPLANATION/1_decisoes-arquitetura.md` |
+| Corrigir bugs             | `docs/KNOWN_ISSUES.md`, `docs/AI_CHANGELOG.md`                                      |
+| Adicionar funcionalidades | `docs/ROADMAP.md`, `docs/3_EXPLANATION/1_decisoes-arquitetura.md`                   |
+
+### Exemplo de Fluxo de Leitura
+
+```text
+📖 ANTES de modificar Header.tsx:
+1. Ler AGENTS.md (regras gerais)
+2. Ler docs/2_REFERENCE/3_componentes-ui.md (seção Header)
+3. Ler docs/AI_CHANGELOG.md (histórico do Header)
+4. Ler CHANGELOG.md [Unreleased] (mudanças recentes)
+```
+
+---
+
+## 📝 Protocolo de Registro de Alterações (PRA)
+
+**APÓS cada alteração em código**, a IA deve obrigatoriamente registrar as mudanças nos documentos apropriados para
+manter o histórico e contexto atualizados.
+
+### Documentos a Atualizar
+
+| Tipo de Alteração               | Documentos a Atualizar                                      |
+| ------------------------------- | ----------------------------------------------------------- |
+| Qualquer código                 | `CHANGELOG.md` (seção `[Unreleased]`)                       |
+| Componentes/Hooks/Utils         | `docs/AI_CHANGELOG.md` (seção do componente afetado)        |
+| Bug conhecido resolvido         | `docs/KNOWN_ISSUES.md` (atualizar status)                   |
+| Novo bug descoberto             | `docs/KNOWN_ISSUES.md` (adicionar entrada)                  |
+| Mudança de arquitetura          | `docs/2_REFERENCE/1_arquitetura.md`                         |
+| Alteração significativa         | Documentação de referência relevante em `docs/2_REFERENCE/` |
+| Mudança na estrutura do projeto | `README.md` (seção "📁 Estrutura do Projeto")               |
+
+### Formato de Registro no AI_CHANGELOG.md
+
+Cada entrada de alteração deve seguir este formato:
+
+```markdown
+### [YYYY-MM-DD] Descrição breve da alteração
+
+**Tipo:** `feat` | `fix` | `refactor` | `style` | `perf` | `docs`
+**Arquivos:** Lista de arquivos modificados
+**Contexto:** Por que a alteração foi feita
+**Detalhes:**
+
+- O que foi alterado
+- Como funciona agora
+- Impactos em outros componentes (se houver)
+  **Notas para IAs futuras:** Informações importantes para contexto
+```
+
+### Formato de Registro no CHANGELOG.md
+
+Seguir o padrão [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/):
+
+```markdown
+## [Unreleased]
+
+### Added
+
+- ✨ Descrição de nova funcionalidade
+
+### Changed
+
+- 🔄 Descrição de alteração em funcionalidade existente
+
+### Fixed
+
+- 🐛 Descrição de correção de bug
+```
+
+---
+
+## 🔄 Fluxo de Trabalho Obrigatório
+
+A IA deve seguir este fluxo de trabalho para TODAS as alterações no código:
+
+```text
+┌─────────────────────────────────────────────────────────────────────┐
+│                    FLUXO DE TRABALHO DA IA                          │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  1️⃣ RECEBER TAREFA                                                 │
+│     └─► Identificar tipo de alteração e componentes afetados        │
+│                                                                     │
+│  2️⃣ FASE DE LEITURA (PRO)                                          │
+│     ├─► Ler AGENTS.md                                               │
+│     ├─► Ler CHANGELOG.md [Unreleased]                               │
+│     ├─► Ler docs/AI_CHANGELOG.md (componentes afetados)             │
+│     └─► Ler documentação de referência relevante                    │
+│                                                                     │
+│  3️⃣ FASE DE ANÁLISE                                                │
+│     ├─► Entender estado atual do componente                         │
+│     ├─► Identificar dependências e impactos                         │
+│     └─► Planejar a alteração                                        │
+│                                                                     │
+│  4️⃣ FASE DE IMPLEMENTAÇÃO                                          │
+│     ├─► Executar alterações no código                               │
+│     ├─► Verificar lint e formatação                                 │
+│     └─► Testar funcionalidade (se possível)                         │
+│                                                                     │
+│  5️⃣ FASE DE REGISTRO (PRA)                                         │
+│     ├─► Atualizar docs/AI_CHANGELOG.md                              │
+│     ├─► Atualizar CHANGELOG.md [Unreleased]                         │
+│     └─► Atualizar documentação de referência (se necessário)        │
+│                                                                     │
+│  6️⃣ VALIDAÇÃO FINAL                                                │
+│     ├─► Confirmar que todas as regras foram seguidas                │
+│     └─► Resumir alterações para o usuário                           │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Regras Críticas do Fluxo
+
+1. **NUNCA pular a Fase de Leitura:** Sempre obter contexto antes de alterar código
+2. **NUNCA pular a Fase de Registro:** Sempre documentar o que foi feito
+3. **Manter consistência:** Seguir os padrões de código existentes
+4. **Ser explícito:** Documentar decisões e justificativas
+5. **Preservar histórico:** Nunca remover entradas antigas do AI_CHANGELOG.md
+
+---
+
 ## 📝 Checklist de Pull Request
 
 Antes de submeter um PR, certifique-se de que todos os itens foram cumpridos:
@@ -267,19 +408,49 @@ Antes de submeter um PR, certifique-se de que todos os itens foram cumpridos:
 - **Consulte a documentação:** Verifique os arquivos em `/docs` para contexto adicional:
   - `/docs/2_REFERENCE/` - Documentação técnica detalhada
   - `/docs/3_EXPLANATION/` - Decisões de arquitetura e princípios
+  - `/docs/AI_CHANGELOG.md` - Histórico de alterações por componente
 
 - **Mantenha a consistência:** Siga os padrões existentes no código. Se um componente similar existe, use-o como referência.
+
+- **Documente sempre:** Após alterações, atualize `CHANGELOG.md` e `docs/AI_CHANGELOG.md` conforme os protocolos PRO/PRA.
 
 ---
 
 ## 📚 Documentação Relacionada
+
+### Referência Técnica
 
 - [Arquitetura do Sistema](docs/2_REFERENCE/1_arquitetura.md)
 - [Modelos de Dados](docs/2_REFERENCE/2_modelos-de-dados.md)
 - [Componentes UI](docs/2_REFERENCE/3_componentes-ui.md)
 - [Hooks Customizados](docs/2_REFERENCE/4_hooks.md)
 - [Design System](docs/2_REFERENCE/5_design-system.md)
+
+### Explicações e Decisões
+
 - [Decisões de Arquitetura](docs/3_EXPLANATION/1_decisoes-arquitetura.md)
+- [Princípios de Design](docs/3_EXPLANATION/2_principios-design.md)
+
+### Gestão do Projeto
+
+- [Changelog do Projeto](CHANGELOG.md)
+- [Registro de Alterações IA](docs/AI_CHANGELOG.md) ⭐ **Leitura obrigatória**
+- [Issues Conhecidos](docs/KNOWN_ISSUES.md)
+- [Roadmap](docs/ROADMAP.md)
+
+---
+
+## ⚠️ Lembrete Importante para IAs
+
+> **Esta seção é um lembrete crítico que deve ser seguido em TODAS as interações.**
+
+1. **SEMPRE leia** `docs/AI_CHANGELOG.md` antes de modificar qualquer componente
+2. **SEMPRE atualize** `docs/AI_CHANGELOG.md` após fazer alterações
+3. **SEMPRE atualize** `CHANGELOG.md` seção `[Unreleased]` após alterações
+4. **NUNCA ignore** os protocolos PRO (Leitura) e PRA (Registro)
+5. **O histórico é valioso:** Mantenha registros detalhados para futuras IAs
+
+O arquivo `docs/AI_CHANGELOG.md` é a **memória coletiva** das IAs que trabalham neste projeto. Trate-o com cuidado.
 
 ---
 

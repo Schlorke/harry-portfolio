@@ -14,6 +14,12 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - 📖 Documentação de referência (arquitetura, componentes, hooks, design system)
 - 📝 Tutoriais de setup e criação de componentes
 - 🔧 Guias how-to para deploy e troubleshooting
+- 🧠 **Protocolo de Leitura Obrigatória (PRO)** para IAs no `AGENTS.md`
+- 📝 **Protocolo de Registro de Alterações (PRA)** para IAs no `AGENTS.md`
+- 🔄 **Fluxo de Trabalho Obrigatório** para IAs com 6 fases definidas
+- 📋 Arquivo `docs/AI_CHANGELOG.md` - registro de alterações por componente para contexto de IAs
+- 📝 Regra para atualizar `README.md` quando houver mudanças na estrutura do projeto
+- 🤖 Arquivo `.cursor/rules/harry-portfolio.mdc` - regras e contexto para IAs do Cursor IDE
 
 ### Planned
 
