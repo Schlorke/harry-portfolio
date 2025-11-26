@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap');
-
 /*=============== VARIABLES CSS ===============*/
 :root {
   /*========== Colors ==========*/
@@ -33,8 +31,7 @@
 
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
-  --body-font: 'Poppins', sans-serif;
-  --second-font: 'Alegreya Sans SC', sans-serif;
+  /* Fontes são injetadas via next/font no layout.tsx */
   --biggest-font-size: 2.5rem;
   --h1-font-size: 1.5rem;
   --h2-font-size: 1.25rem;

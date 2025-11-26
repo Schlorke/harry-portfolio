@@ -162,14 +162,15 @@ const Home = () => {
 
           <div className='skills__items'>
             {skills.map((skill, index) => (
-              <Image
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
                 key={index}
                 src={skill}
                 width={48}
                 height={48}
-                loading='lazy'
                 alt={`Skill ${index}`}
                 className='skills__item'
+                loading='lazy'
               />
             ))}
           </div>

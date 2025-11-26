@@ -146,15 +146,15 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <p className='projects__description'>{project.description}</p>
         <div className='projects__skills'>
           {project.skills.map((skill, index) => (
-            <Image
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               key={index}
               src={skill}
               width={24}
               height={24}
-              loading='lazy'
               alt={`Skill ${index}`}
-              title={`Skill ${index}`}
               className='projects__skill'
+              loading='lazy'
             />
           ))}
         </div>

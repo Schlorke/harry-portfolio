@@ -1,74 +1,115 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
+e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- 📚 Estrutura de documentação completa baseada no Framework Diátaxis
+- 🤖 Arquivo `AGENTS.md` com instruções para agentes de IA
+- 📖 Documentação de referência (arquitetura, componentes, hooks, design system)
+- 📝 Tutoriais de setup e criação de componentes
+- 🔧 Guias how-to para deploy e troubleshooting
+
 ### Planned
 
-- Service Worker implementation for offline functionality
-- Dark/Light theme toggle
-- Multi-language support (EN/PT-BR)
-- Blog section integration
-- Advanced animations with GSAP
+- Service Worker para funcionalidade offline
+- Toggle de tema Dark/Light
+- Suporte multi-idioma (EN/PT-BR)
+- Seção de blog integrada
+- Animações avançadas com GSAP
+
+---
+
+## [1.1.0] - 2025-11-26
+
+### Added
+
+- ✨ Migração completa para **Next.js 14** com App Router
+- 🔷 Adoção de **TypeScript** com tipagem estrita
+- 📱 Componentes React funcionais com hooks customizados
+- 🖼️ Otimização de imagens com `next/image`
+- 🔤 Otimização de fontes com `next/font`
+- 🎨 Integração do Tailwind CSS com prefixo `tw-`
+- 🔒 Headers de segurança configurados
+
+### Changed
+
+- 🏗️ Estrutura de projeto reorganizada para App Router
+- 📦 Migração de Vite para Next.js build system
+- 🎯 CSS refatorado com variáveis CSS modernas
+- ⚡ Melhoria significativa em performance e SEO
+
+### Technical Implementation
+
+- **Framework**: Next.js 14.2.15 (App Router)
+- **UI Library**: React 18.2.0 com TypeScript 5.3.3
+- **Styling**: CSS customizado + Tailwind CSS 3.4.1
+- **Build**: SWC Minifier para otimização
+- **Images**: AVIF/WebP com lazy loading automático
+
+---
 
 ## [1.0.0] - 2024-12-19
 
 ### Added
 
-- ✨ Initial portfolio release with modern design
-- 📱 Fully responsive layout for all devices
-- 🎨 ScrollReveal animations for smooth user experience
-- 📧 Functional contact form with EmailJS integration
-- 🚀 PWA configuration with web manifest
-- ⚡ Vite build system for optimal performance
-- 🎯 SEO optimization with structured metadata
-- ♿ Accessibility improvements following WCAG guidelines
-- 🔧 Development tooling with ESLint and Prettier
-- 📊 Comprehensive project documentation
+- ✨ Lançamento inicial do portfólio com design moderno
+- 📱 Layout totalmente responsivo para todos os dispositivos
+- 🎨 Animações ScrollReveal para experiência suave
+- 📧 Formulário de contato funcional com integração EmailJS
+- 🚀 Configuração PWA com web manifest
+- ⚡ Sistema de build Vite para performance otimizada
+- 🎯 Otimização SEO com metadados estruturados
+- ♿ Melhorias de acessibilidade seguindo WCAG
+- 🔧 Ferramentas de desenvolvimento com ESLint e Prettier
+- 📊 Documentação abrangente do projeto
 
 ### Technical Implementation
 
 - **Frontend**: Vanilla JavaScript ES6+, HTML5, CSS3
-- **Build Tool**: Vite 7.1.3 for development and production builds
-- **Performance**: Lazy loading, image optimization, CSS minification
-- **Browser Compatibility**: Cross-browser support for modern browsers
-- **Code Quality**: ESLint configuration with automatic fixing
-- **Formatting**: Prettier integration for consistent code style
-- **Spell Check**: CSpell for multilingual content validation
+- **Build Tool**: Vite 7.1.3 para builds de desenvolvimento e produção
+- **Performance**: Lazy loading, otimização de imagens, minificação CSS
+- **Browser Compatibility**: Suporte cross-browser para navegadores modernos
+- **Code Quality**: Configuração ESLint com correção automática
+- **Formatting**: Integração Prettier para estilo de código consistente
+- **Spell Check**: CSpell para validação de conteúdo multilíngue
 
 ### Project Structure
 
-- 🏗️ Modular CSS architecture with custom properties
-- 📁 Organized asset management (images, videos, documents)
-- 🔄 Automated deployment pipeline to GitHub Pages
-- 📝 Comprehensive documentation following industry standards
+- 🏗️ Arquitetura CSS modular com propriedades customizadas
+- 📁 Gerenciamento organizado de assets (imagens, vídeos, documentos)
+- 🔄 Pipeline de deploy automatizado para GitHub Pages
+- 📝 Documentação seguindo padrões da indústria
 
 ### Features
 
-- **Hero Section**: Professional introduction with animated elements
-- **About Section**: Personal background and professional journey
-- **Projects Showcase**: Interactive gallery with video previews
-  - DI PRIMIO ADVOCACIA - Legal services website
-  - HENRY VENTURA - Political campaign platform
-  - EASY RENT - Vehicle rental platform
-  - MON APART - Apartment booking system
-  - DASHBOARD CRM - Customer relationship management
-- **Services Section**: Detailed service offerings
-- **Experience Timeline**: Professional background visualization
-- **Contact Form**: Integrated email functionality
-- **Social Links**: Professional network connections
+- **Hero Section**: Introdução profissional com elementos animados
+- **About Section**: Background pessoal e jornada profissional
+- **Projects Showcase**: Galeria interativa com previews em vídeo
+  - DI PRIMIO ADVOCACIA - Site de serviços jurídicos
+  - HENRY VENTURA - Plataforma de campanha política
+  - EASY RENT - Plataforma de locação de veículos
+  - MON APART - Sistema de reserva de apartamentos
+  - DASHBOARD CRM - Gerenciamento de relacionamento com clientes
+  - GB LOCAÇÕES - Locação de equipamentos de construção
+  - DASHBOARD EXECUTIVO - Métricas e relatórios em tempo real
+- **Services Section**: Ofertas de serviços detalhadas
+- **Experience Timeline**: Visualização de background profissional
+- **Contact Form**: Funcionalidade de email integrada
+- **Social Links**: Conexões de rede profissional
 
 ### Performance Optimizations
 
-- 🖼️ WebP image format for faster loading
-- 📹 Optimized video assets with proper compression
-- 🎯 Critical CSS inlining for improved LCP
-- 🔄 Efficient JavaScript bundling and splitting
-- 💾 Asset caching strategies
+- 🖼️ Formato de imagem WebP para carregamento rápido
+- 📹 Assets de vídeo otimizados com compressão adequada
+- 🎯 CSS crítico inline para LCP melhorado
+- 🔄 Bundling e splitting eficiente de JavaScript
+- 💾 Estratégias de cache de assets
 
 ### Browser Compatibility
 
@@ -76,104 +117,71 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✅ Firefox 85+
 - ✅ Safari 14+
 - ✅ Edge 88+
-- ⚠️ Graceful degradation for older browsers
+- ⚠️ Degradação graciosa para navegadores antigos
 
 ### Security
 
-- 🔒 Content Security Policy implementation
-- 🛡️ XSS protection headers
-- 🔐 Secure external resource loading
+- 🔒 Implementação de Content Security Policy
+- 🛡️ Headers de proteção XSS
+- 🔐 Carregamento seguro de recursos externos
 
-### Development Environment
-
-- 🛠️ Hot module replacement for development
-- 🔍 ESLint configuration for code quality
-- 💅 Prettier for consistent formatting
-- 📖 Spell checking for content accuracy
-- 🚀 Automated deployment scripts
+---
 
 ## [0.9.0] - 2024-12-18
 
 ### Added - Core Implementation
 
-- 🎨 Core design system implementation
-- 📱 Mobile-first responsive foundation
-- 🏗️ Basic project structure setup
-- 📄 Initial HTML semantic structure
+- 🎨 Implementação do sistema de design principal
+- 📱 Fundação responsiva mobile-first
+- 🏗️ Setup básico da estrutura do projeto
+- 📄 Estrutura semântica HTML inicial
 
 ### Changed
 
-- 🔧 Migrated from Create React App to Vite
-- 📦 Updated build configuration for better performance
+- 🔧 Migração de Create React App para Vite
+- 📦 Configuração de build atualizada para melhor performance
+
+---
 
 ## [0.8.0] - 2024-12-17
 
 ### Added - Project Foundation
 
-- 🎯 Project conception and planning
-- 📋 Requirements gathering and analysis
-- 🎨 Design mockups and wireframes
-- 🔧 Development environment setup
+- 🎯 Concepção e planejamento do projeto
+- 📋 Levantamento e análise de requisitos
+- 🎨 Mockups de design e wireframes
+- 🔧 Setup do ambiente de desenvolvimento
 
 ### Technical Decisions
 
-- **Build Tool**: Chose Vite for faster development experience
-- **Styling**: CSS3 with custom properties for maintainability
-- **JavaScript**: Vanilla JS for lightweight implementation
-- **Animations**: ScrollReveal for performant scroll animations
-- **Email Service**: EmailJS for client-side email functionality
+- **Build Tool**: Vite escolhido para experiência de desenvolvimento mais rápida
+- **Styling**: CSS3 com propriedades customizadas para manutenibilidade
+- **JavaScript**: Vanilla JS para implementação leve
+- **Animations**: ScrollReveal para animações de scroll performáticas
+- **Email Service**: EmailJS para funcionalidade de email client-side
 
 ---
 
-## Version Schema
+## Esquema de Versão
 
-This project follows [Semantic Versioning](https://semver.org/):
+Este projeto segue [Semantic Versioning](https://semver.org/lang/pt-BR/):
 
-- **MAJOR** version when making incompatible API changes
-- **MINOR** version when adding functionality in a backwards compatible manner
-- **PATCH** version when making backwards compatible bug fixes
+- **MAJOR**: Mudanças incompatíveis com versões anteriores
+- **MINOR**: Novas funcionalidades compatíveis com versões anteriores
+- **PATCH**: Correções de bugs compatíveis com versões anteriores
 
-## Types of Changes
+## Tipos de Mudanças
 
-- **Added** for new features
-- **Changed** for changes in existing functionality
-- **Deprecated** for soon-to-be removed features
-- **Removed** for now removed features
-- **Fixed** for any bug fixes
-- **Security** for vulnerability fixes
+- **Added**: Novas funcionalidades
+- **Changed**: Mudanças em funcionalidades existentes
+- **Deprecated**: Funcionalidades que serão removidas em breve
+- **Removed**: Funcionalidades removidas
+- **Fixed**: Correções de bugs
+- **Security**: Correções de vulnerabilidades
 
-## Release Notes
+---
 
-### v1.0.0 Highlights
-
-This major release represents the completion of the initial portfolio website with a focus on:
-
-1. **Performance**: Achieved excellent Core Web Vitals scores
-2. **Accessibility**: WCAG 2.1 AA compliance
-3. **SEO**: Comprehensive metadata and structured data
-4. **Cross-browser**: Extensive testing across modern browsers
-5. **Maintainability**: Clean code architecture with comprehensive documentation
-
-### Migration Guide
-
-For developers working with previous versions:
-
-#### From 0.x to 1.0
-
-- No breaking changes in public API
-- Updated dependencies require Node.js 18+
-- New build scripts available (see package.json)
-
-### Contributing
-
-When contributing to this project, please:
-
-1. Follow [Conventional Commits](https://www.conventionalcommits.org/) specification
-2. Update this CHANGELOG.md with your changes
-3. Ensure all tests pass and code is properly formatted
-4. Update documentation as needed
-
-### Links
+## Links
 
 - [Homepage](https://schlorke.github.io/harry-portfolio/)
 - [Repository](https://github.com/Schlorke/harry-portfolio)

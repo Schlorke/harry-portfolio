@@ -1,7 +1,25 @@
 import type { Metadata, Viewport } from 'next'
+import { Alegreya_Sans_SC, Poppins } from 'next/font/google'
 import Script from 'next/script'
-import './globals.css'
 import { projects } from '../data'
+import './globals.css'
+
+// Otimização de fontes com next/font
+const poppins = Poppins({
+  weight: ['300', '400', '500', '600'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--body-font',
+  preload: true
+})
+
+const alegreyaSansSC = Alegreya_Sans_SC({
+  weight: ['300', '400', '500', '700', '800', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--second-font',
+  preload: true
+})
 
 const projectVideos = projects
   .map(project => project.video)
@@ -52,7 +70,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='pt-BR'>
+    <html
+      lang='pt-BR'
+      className={`${poppins.variable} ${alegreyaSansSC.variable}`}
+    >
       <head>
         <Script id='page-readiness' strategy='beforeInteractive'>
           {`
@@ -83,11 +104,7 @@ export default function RootLayout({
           />
         ))}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link
-          rel='preconnect'
-          href='https://fonts.gstatic.com'
-          crossOrigin=''
-        />
+        <link rel='preconnect' href='https://cdn.jsdelivr.net' crossOrigin='' />
         <link
           rel='stylesheet'
           href='https://fonts.googleapis.com/icon?family=Material+Icons'
