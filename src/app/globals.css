@@ -213,7 +213,11 @@ header .logo {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: all 1s ease;
+  transition:
+    transform 1s ease,
+    top 1s ease,
+    width 1s ease,
+    left 1s ease;
 }
 
 /* Logo após animação */
@@ -233,6 +237,14 @@ header .logo img {
 /* Logo menor após animação */
 header.animate_header .logo img {
   width: 125px;
+}
+
+header.header-stable .logo {
+  transition: none;
+}
+
+header.header-stable .logo img {
+  transition: none;
 }
 
 /*========== WAVE ANIMATION BACKGROUND ==========*/

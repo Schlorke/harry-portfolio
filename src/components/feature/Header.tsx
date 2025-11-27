@@ -10,12 +10,14 @@ const Header = () => {
   const [isAnimated, setIsAnimated] = useState(false)
   const [isNavVisible, setIsNavVisible] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isHeaderStable, setIsHeaderStable] = useState(false)
   const { handleLinkClick } = useSmoothScroll()
 
   useEffect(() => {
     let readyFrame: number | null = null
     let timer1: ReturnType<typeof setTimeout> | null = null
     let timer2: ReturnType<typeof setTimeout> | null = null
+    let stabilityTimer: ReturnType<typeof setTimeout> | null = null
 
     const startHeaderSequence = () => {
       if (readyFrame !== null) return
@@ -23,6 +25,9 @@ const Header = () => {
 
       timer1 = setTimeout(() => {
         setIsAnimated(true)
+        stabilityTimer = setTimeout(() => {
+          setIsHeaderStable(true)
+        }, 1200)
       }, 1500)
 
       timer2 = setTimeout(() => {
@@ -49,6 +54,7 @@ const Header = () => {
       }
       if (timer1) clearTimeout(timer1)
       if (timer2) clearTimeout(timer2)
+      if (stabilityTimer) clearTimeout(stabilityTimer)
       window.removeEventListener('page-ready', handlePageReady)
     }
   }, [])
@@ -61,8 +67,13 @@ const Header = () => {
     { href: '#Contato', label: 'Contato' }
   ]
 
-  const headerClasses =
-    `${isAnimated ? 'animate_header' : ''} ${isReady ? 'header-ready' : 'header-preload'}`.trim()
+  const headerClasses = [
+    isAnimated ? 'animate_header' : '',
+    isReady ? 'header-ready' : 'header-preload',
+    isHeaderStable ? 'header-stable' : ''
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   return (
     <header className={headerClasses}>

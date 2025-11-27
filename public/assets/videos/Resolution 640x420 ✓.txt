@@ -1,0 +1,10 @@
+Resolution: 640x420 ✓
+Codec: H.264 ✓
+Encoder: Auto ✓
+Frame rate: 30 fps ✓
+Rate Control: Constant Bitrate
+Bitrate: 1500 kbps (ou 2000 kbps se quiser mais qualidade)
+Encoding Profile: High
+Preset: Balanced ✓
+Quality: (não aplicável com bitrate fixo)
+Key Frames: Automatic ✓

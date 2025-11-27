@@ -53,6 +53,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 - 🐛 **Tela preta inicial** - CSS de loading agora só oculta `.main`, `footer` e FAB (header/wave sempre visíveis)
 - 🐛 **ScrollReveal timing** - Animações agora iniciam sincronizadas com fim da animação do header
+- 🐛 Logo deixa de flutuar ao redimensionar; transicoes da logo sao desligadas apos a animacao inicial do header
 
 ### Technical
 

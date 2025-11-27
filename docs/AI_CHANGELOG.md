@@ -110,6 +110,23 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 **Histórico de Alterações:**
 
+#### [2025-11-27] Transicoes da logo desativadas apos animacao
+
+**Tipo:** `fix`
+**Arquivos:** `src/components/feature/Header.tsx`, `src/app/globals.css`
+**Contexto:** A logo deslizava durante o resize porque as transicoes de `left/transform` continuavam ativas apos a
+animacao inicial.
+**Detalhes:**
+
+- Adicionado estado `isHeaderStable` para aplicar a classe `header-stable` quando a animacao termina
+- Transicoes da logo/imagem sao removidas apos 1.2s, evitando o efeito de "flutuacao" ao redimensionar
+- Mantida a animacao original de entrada (centro para canto) antes de desativar as transicoes
+
+**Notas para IAs futuras:**
+
+- Se ajustar a duracao da animacao, revise o timeout de estabilidade para nao cortar a transicao inicial
+- A classe `header-stable` serve apenas para evitar reativacoes de transicoes em resizes
+
 #### [2025-11-27] Implementação Wave Animation Background
 
 **Tipo:** `feat`
@@ -1115,25 +1132,19 @@ src/components/gl/
 
 **Histórico de Alterações:**
 
-#### [2025-11-26] Migração de estilos
+#### [2025-11-27] Remocao de transicoes da logo apos animacao
 
-**Tipo:** `refactor`
+**Tipo:** `fix`
 **Arquivos:** `src/app/globals.css`
-**Contexto:** Migrar estilos do projeto Vite para Next.js
+**Contexto:** As transicoes da logo ficavam ativas durante o resize por dependerem de calculos com `vw`.
 **Detalhes:**
 
-- Mantidos todos os estilos originais
-- Variáveis CSS em `:root`
-- Cor principal: hue 358 (vermelho)
-- Breakpoints: 320px, 540px, 768px, 1200px, 1500px
+- Transicao da logo restrita a propriedades relevantes e classe `header-stable` para desligar o efeito apos a animacao
+- Logo e imagem nao animam em resizes; a animacao inicial de entrada permanece intacta
 
 **Notas para IAs futuras:**
 
-- **CUIDADO:** Este arquivo tem ~1500 linhas
-- Não remover classes sem entender impacto
-- Variáveis CSS são a fonte de verdade para cores
-- Tailwind usa prefixo `tw-` para evitar conflitos
-- Ver `docs/2_REFERENCE/5_design-system.md` para detalhes
+- Se ajustar tempos no Header, mantenha coerencia com a remocao de transicoes nessa classe auxiliar
 
 #### [2025-11-27] Header/nav alinhados às margens do conteúdo
 
@@ -1160,6 +1171,26 @@ src/components/gl/
   `position`
 - Para novos componentes que precisem seguir o mesmo alinhamento, reutilize as
   variáveis globais ou ajuste `--header-align-offset` caso o design mude
+
+#### [2025-11-26] Migração de estilos
+
+**Tipo:** `refactor`
+**Arquivos:** `src/app/globals.css`
+**Contexto:** Migrar estilos do projeto Vite para Next.js
+**Detalhes:**
+
+- Mantidos todos os estilos originais
+- Variáveis CSS em `:root`
+- Cor principal: hue 358 (vermelho)
+- Breakpoints: 320px, 540px, 768px, 1200px, 1500px
+
+**Notas para IAs futuras:**
+
+- **CUIDADO:** Este arquivo tem ~1500 linhas
+- Não remover classes sem entender impacto
+- Variáveis CSS são a fonte de verdade para cores
+- Tailwind usa prefixo `tw-` para evitar conflitos
+- Ver `docs/2_REFERENCE/5_design-system.md` para detalhes
 
 ---
 
