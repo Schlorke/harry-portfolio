@@ -5,6 +5,26 @@ const nextConfig = {
   // Otimizações de performance
   compress: true,
 
+  // Configuração webpack para Three.js (wave-animation)
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        crypto: false,
+        stream: false,
+        buffer: false,
+        util: false,
+        url: false
+      }
+    }
+    return config
+  },
+
+  // Turbopack configuration
+  turbopack: {},
+
   // Otimização de imagens
   images: {
     formats: ['image/avif', 'image/webp'],

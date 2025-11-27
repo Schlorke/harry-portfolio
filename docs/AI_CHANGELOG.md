@@ -98,14 +98,44 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 - Componente Client (`"use client"`)
 - Navegação principal com links para seções
 - Menu hamburger para mobile
+- **Background animado com WebGL (wave animation)**
 - Animações de entrada com CSS
+- Sistema de loading screen integrado
 
 **Dependências:**
 
 - `useSmoothScroll` hook
+- `WaveAnimation` componente de `../gl`
 - Classes CSS em `globals.css`
 
 **Histórico de Alterações:**
+
+#### [2025-11-27] Implementação Wave Animation Background
+
+**Tipo:** `feat`
+**Arquivos:** `src/components/feature/Header.tsx`, `src/components/gl/*`, `src/hooks/usePageLoading.ts`, `src/app/globals.css`
+**Contexto:** Substituição do background estático (Background.png) por animação WebGL de partículas
+
+**Detalhes:**
+
+- Substituído `<Image>` do Background.png pelo componente `<WaveAnimation>`
+- Criado componente `WaveAnimation` em `src/components/gl/` usando Three.js
+- Animação de partículas brancas com movimento ondulatório
+- Efeito de reveal animado na inicialização
+- Transição suave para header após loading completo
+- Animação funciona como "loading screen" até página carregar
+- **O componente usa `position: fixed` com `100vw x 100vh` para ocupar toda a tela**
+- **A transição usa `opacity: 0` e `transform: translateY(-100%)` para desaparecer**
+
+**Notas para IAs futuras:**
+
+- O componente WaveAnimation usa WebGL via @react-three/fiber
+- **IMPORTANTE:** O Canvas do Three.js precisa de container com dimensões explícitas (100vw/100vh)
+- Configurações de performance em `src/components/gl/index.tsx`
+- Shaders GLSL em `src/components/gl/shaders/`
+- O hook `usePageLoading` controla quando a animação de transição inicia (minLoadingTime: 3000ms)
+- A animação wave desaparece junto com a transição para header (via CSS com transition 1s)
+- CSS relevante: `.header-background` em `globals.css` - usa `position: fixed` e `inset: 0`
 
 #### [2025-11-26] Reorganização para components/feature/
 
@@ -502,7 +532,132 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 ---
 
+## Componentes WebGL
+
+---
+
+### WaveAnimation
+
+**Arquivo:** `src/components/gl/index.tsx`
+
+**Estado Atual:**
+
+- Componente Client (`"use client"`)
+- Animação WebGL de partículas com movimento ondulatório
+- Renderização via Three.js e @react-three/fiber
+- Efeito de reveal animado na inicialização
+- Efeito de sparkle nas partículas
+- Depth of Field (DOF) para efeito de profundidade
+
+**Dependências:**
+
+- `@react-three/fiber` - Canvas React para Three.js
+- `@react-three/drei` - Helpers (useFBO)
+- `three` - Three.js core
+- Shaders GLSL em `src/components/gl/shaders/`
+
+**Estrutura:**
+
+```
+src/components/gl/
+├── index.tsx              # Componente principal WaveAnimation
+├── particles.tsx          # Lógica de partículas e animação
+└── shaders/
+    ├── utils.ts           # Funções GLSL compartilhadas
+    ├── pointMaterial.ts   # Shader de renderização das partículas
+    └── simulationMaterial.ts # Shader de simulação do movimento
+```
+
+**Props:**
+
+| Prop | Tipo | Padrão | Descrição |
+|------|------|--------|-----------|
+| `hovering` | `boolean` | `false` | Ativa efeito de introspect |
+| `className` | `string` | `''` | Classes CSS adicionais |
+
+**Histórico de Alterações:**
+
+#### [2025-11-27] Criação do componente
+
+**Tipo:** `feat`
+**Arquivos:** `src/components/gl/*`
+**Contexto:** Implementação de animação de ondas como background do header
+
+**Detalhes:**
+
+- Portado de projeto externo (`reusable-components/wave-animation`)
+- Removidos controles Leva (valores fixos para produção)
+- Configurações otimizadas para performance
+- Integrado com CSS do header para transições
+
+**Notas para IAs futuras:**
+
+- Para alterar cor das partículas: editar `pointMaterial.ts` (fragmentShader)
+- Para alterar intensidade/velocidade: editar config em `index.tsx`
+- Requer configuração webpack em `next.config.mjs` para Three.js
+- Canvas usa `dpr={[1, 1.5]}` para balancear qualidade/performance
+
+---
+
 ## Hooks
+
+---
+
+### usePageLoading
+
+**Arquivo:** `src/hooks/usePageLoading.ts`
+
+**Estado Atual:**
+
+- Hook Client (`"use client"`)
+- Detecta quando a página carregou completamente
+- Verifica imagens, vídeos e fontes
+- Dispara evento `page-ready` quando pronto
+- Tempo mínimo de loading configurável
+- Timeout máximo como fallback
+
+**Dependências:**
+
+- Nenhuma externa
+
+**Parâmetros:**
+
+| Opção | Tipo | Padrão | Descrição |
+|-------|------|--------|-----------|
+| `minLoadingTime` | `number` | `2000` | Tempo mínimo de loading (ms) |
+| `maxLoadingTime` | `number` | `8000` | Timeout máximo (ms) |
+
+**Retorno:**
+
+```typescript
+{
+  isLoading: boolean       // Se ainda está carregando
+  loadingProgress: number  // Progresso de 0-100
+}
+```
+
+**Histórico de Alterações:**
+
+#### [2025-11-27] Criação do hook
+
+**Tipo:** `feat`
+**Arquivos:** `src/hooks/usePageLoading.ts`
+**Contexto:** Gerenciar loading screen com wave animation
+
+**Detalhes:**
+
+- Verifica `img.complete` para imagens
+- Verifica `video.readyState >= 2` para vídeos
+- Adiciona/remove classes `page-loading`/`page-ready` no body
+- Dispara evento customizado `page-ready`
+- Intervalo de verificação: 100ms
+
+**Notas para IAs futuras:**
+
+- O Header.tsx escuta o evento `page-ready` para iniciar transição
+- `minLoadingTime` garante que a animação seja vista
+- `maxLoadingTime` evita travamento se algo falhar
+- Usado em `page.tsx` para controlar loading global
 
 ---
 
@@ -924,10 +1079,11 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 | Categoria           | Quantidade | Última Atualização |
 | ------------------- | ---------- | ------------------ |
-| Componentes Feature | 3          | 2025-11-26         |
+| Componentes Feature | 3          | 2025-11-27         |
 | Componentes UI      | 1          | 2025-11-26         |
+| Componentes WebGL   | 1          | 2025-11-27         |
 | Seções              | 5          | 2025-11-26         |
-| Hooks               | 4          | 2025-11-26         |
+| Hooks               | 5          | 2025-11-27         |
 | Utilitários         | 1          | 2025-11-26         |
 | Tipos               | 4          | 2025-11-26         |
 
@@ -945,4 +1101,4 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 ---
 
-**Última atualização:** 26 de Novembro de 2025
+**Última atualização:** 27 de Novembro de 2025

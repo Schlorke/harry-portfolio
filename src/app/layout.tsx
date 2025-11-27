@@ -70,23 +70,7 @@ export default function RootLayout({
       className={`${poppins.variable} ${alegreyaSansSC.variable}`}
     >
       <head>
-        <Script id='page-readiness' strategy='beforeInteractive'>
-          {`
-            const ready = async () => {
-              const waitForFonts = document?.fonts?.ready ?? Promise.resolve();
-              await Promise.all([
-                waitForFonts,
-                new Promise(resolve => window.addEventListener('load', resolve, { once: true }))
-              ]);
-              document.body?.classList.remove('page-loading');
-              document.body?.classList.add('page-ready');
-              document.documentElement?.classList.add('page-ready');
-              window.dispatchEvent(new Event('page-ready'));
-            };
-            ready();
-          `}
-        </Script>
-        <link rel='preload' as='image' href='/assets/img/Background.png' />
+{/* Page loading agora é gerenciado pelo hook usePageLoading */}
         {/* Vídeos preloaded apenas quando necessário (on hover/scroll) */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://cdn.jsdelivr.net' crossOrigin='' />

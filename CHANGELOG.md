@@ -9,6 +9,33 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- ✨ **Wave Animation Background** - Substituição do background estático por animação WebGL de partículas
+  - Novo componente `WaveAnimation` em `src/components/gl/`
+  - Animação de ondas com partículas brancas usando Three.js e @react-three/fiber
+  - Efeito de reveal animado na inicialização
+  - Transição suave para header após loading completo
+- 🔄 **Sistema de Loading Screen** - Tela de loading que aguarda carregamento completo
+  - Novo hook `usePageLoading` para detectar quando recursos estão carregados
+  - Tempo mínimo de loading para garantir visualização da animação
+  - Fallback com timeout máximo para evitar travamentos
+- 📦 Novas dependências: `@react-three/fiber`, `@react-three/drei`, `three`, `leva`
+
+### Changed
+
+- 🔄 **Header.tsx** - Background substituído de imagem estática para animação WebGL
+- ⚙️ **next.config.mjs** - Adicionada configuração webpack para Three.js
+- 🎨 **globals.css** - Novos estilos para `.header-background` e `.wave-animation`
+- 📝 **layout.tsx** - Removido preload do Background.png (não mais necessário)
+- 🔧 **page.tsx** - Integração com hook `usePageLoading`
+
+### Technical
+
+- Configuração webpack para polyfills (fs, path, crypto, etc.)
+- Shaders GLSL para simulação de partículas e efeitos visuais
+- Sistema de FBO (Frame Buffer Object) para renderização eficiente
+
+---
+
 - 📚 Estrutura de documentação completa baseada no Framework Diátaxis
 - 🤖 Arquivo `AGENTS.md` com instruções para agentes de IA
 - 📖 Documentação de referência (arquitetura, componentes, hooks, design system)

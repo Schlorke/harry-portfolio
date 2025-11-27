@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useSmoothScroll } from '../../hooks/useSmoothScroll'
+import { WaveAnimation } from '../gl'
 
 const Header = () => {
   const [isReady, setIsReady] = useState(false)
@@ -65,17 +66,9 @@ const Header = () => {
 
   return (
     <header className={headerClasses}>
-      {/* Background Image */}
-      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-        <Image
-          src='/assets/img/Background.png'
-          className='background'
-          alt='Imagem de fundo'
-          fill
-          style={{ objectFit: 'cover' }}
-          priority
-          fetchPriority='high'
-        />
+      {/* Wave Animation Background - substitui Background.png */}
+      <div className='header-background'>
+        <WaveAnimation hovering={false} />
       </div>
 
       {/* Logo */}
