@@ -70,7 +70,7 @@ export default function RootLayout({
       className={`${poppins.variable} ${alegreyaSansSC.variable}`}
     >
       <head>
-{/* Page loading agora é gerenciado pelo hook usePageLoading */}
+        {/* Page loading agora é gerenciado pelo hook usePageLoading */}
         {/* Vídeos preloaded apenas quando necessário (on hover/scroll) */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://cdn.jsdelivr.net' crossOrigin='' />

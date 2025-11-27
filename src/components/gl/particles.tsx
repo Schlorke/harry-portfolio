@@ -16,9 +16,11 @@ function damp(
   smoothness: number,
   delta: number
 ) {
-  const current = obj[prop].value
+  const current = obj[prop]?.value ?? 0
   const diff = target - current
-  obj[prop].value = current + diff * (1 - Math.exp(-smoothness * delta * 60))
+  if (obj[prop]) {
+    obj[prop].value = current + diff * (1 - Math.exp(-smoothness * delta * 60))
+  }
 }
 
 interface ParticlesProps {
@@ -68,16 +70,24 @@ export function Particles({
   const dofPointsMaterial = useMemo(() => {
     const m = new DofPointsMaterial()
     m.uniforms.positions.value = target.texture
-    m.uniforms.initialPositions.value = simulationMaterial.uniforms.positions.value
+    m.uniforms.initialPositions.value =
+      simulationMaterial.uniforms.positions.value
     return m
   }, [simulationMaterial, target.texture])
 
   const [scene] = useState(() => new THREE.Scene())
-  const [camera] = useState(() => new THREE.OrthographicCamera(-1, 1, 1, -1, 1 / Math.pow(2, 53), 1))
-  const [positions] = useState(
-    () => new Float32Array([-1, -1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0])
+  const [camera] = useState(
+    () => new THREE.OrthographicCamera(-1, 1, 1, -1, 1 / Math.pow(2, 53), 1)
   )
-  const [uvs] = useState(() => new Float32Array([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0]))
+  const [positions] = useState(
+    () =>
+      new Float32Array([
+        -1, -1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0
+      ])
+  )
+  const [uvs] = useState(
+    () => new Float32Array([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0])
+  )
 
   const particles = useMemo(() => {
     const length = size * size
@@ -123,7 +133,13 @@ export function Particles({
     dofPointsMaterial.uniforms.uFocus.value = focus
     dofPointsMaterial.uniforms.uBlur.value = aperture
 
-    damp(dofPointsMaterial.uniforms, 'uTransition', introspect ? 1.0 : 0.0, introspect ? 0.35 : 0.2, delta)
+    damp(
+      { uTransition: dofPointsMaterial.uniforms.uTransition },
+      'uTransition',
+      introspect ? 1.0 : 0.0,
+      introspect ? 0.35 : 0.2,
+      delta
+    )
 
     simulationMaterial.uniforms.uTime.value = currentTime
     simulationMaterial.uniforms.uNoiseScale.value = noiseScale
@@ -140,15 +156,18 @@ export function Particles({
   return (
     <>
       {createPortal(
-        <mesh material={simulationMaterial}>
+        <mesh material={simulationMaterial as THREE.Material}>
           <bufferGeometry>
-            <bufferAttribute attach='attributes-position' args={[positions, 3]} />
+            <bufferAttribute
+              attach='attributes-position'
+              args={[positions, 3]}
+            />
             <bufferAttribute attach='attributes-uv' args={[uvs, 2]} />
           </bufferGeometry>
         </mesh>,
         scene
       )}
-      <points material={dofPointsMaterial}>
+      <points material={dofPointsMaterial as THREE.Material}>
         <bufferGeometry>
           <bufferAttribute attach='attributes-position' args={[particles, 3]} />
         </bufferGeometry>
@@ -156,4 +175,3 @@ export function Particles({
     </>
   )
 }
-

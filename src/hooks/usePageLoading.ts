@@ -22,17 +22,24 @@ export function usePageLoading(options: UsePageLoadingOptions = {}) {
   const checkAllResourcesLoaded = useCallback(() => {
     // Verificar imagens
     const images = Array.from(document.querySelectorAll('img'))
-    const loadedImages = images.filter(img => img.complete && img.naturalHeight !== 0)
+    const loadedImages = images.filter(
+      img => img.complete && img.naturalHeight !== 0
+    )
 
     // Verificar vídeos (apenas se têm preload)
-    const videos = Array.from(document.querySelectorAll('video[preload="auto"], video[preload="metadata"]'))
+    const videos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>(
+        'video[preload="auto"], video[preload="metadata"]'
+      )
+    )
     const loadedVideos = videos.filter(video => video.readyState >= 2) // HAVE_CURRENT_DATA
 
     const totalResources = images.length + videos.length
     const loadedResources = loadedImages.length + loadedVideos.length
 
     // Calcular progresso
-    const progress = totalResources > 0 ? (loadedResources / totalResources) * 100 : 100
+    const progress =
+      totalResources > 0 ? (loadedResources / totalResources) * 100 : 100
 
     return {
       isComplete: loadedResources >= totalResources,
@@ -98,7 +105,9 @@ export function usePageLoading(options: UsePageLoadingOptions = {}) {
 
     // Timeout máximo (fallback)
     maxTimeoutId = setTimeout(() => {
-      console.warn('[usePageLoading] Timeout máximo atingido, forçando fim do loading')
+      console.warn(
+        '[usePageLoading] Timeout máximo atingido, forçando fim do loading'
+      )
       finishLoading()
     }, maxLoadingTime)
 
@@ -141,4 +150,3 @@ export function usePageLoading(options: UsePageLoadingOptions = {}) {
     loadingProgress
   }
 }
-

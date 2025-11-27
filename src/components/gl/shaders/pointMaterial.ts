@@ -2,6 +2,20 @@ import * as THREE from 'three'
 import { periodicNoiseGLSL } from './utils'
 
 export class DofPointsMaterial extends THREE.ShaderMaterial {
+  declare uniforms: {
+    positions: { value: THREE.Texture | null }
+    initialPositions: { value: THREE.Texture | null }
+    uTime: { value: number }
+    uFocus: { value: number }
+    uFov: { value: number }
+    uBlur: { value: number }
+    uTransition: { value: number }
+    uPointSize: { value: number }
+    uOpacity: { value: number }
+    uRevealFactor: { value: number }
+    uRevealProgress: { value: number }
+  }
+
   constructor() {
     super({
       vertexShader: /* glsl */ `
@@ -135,4 +149,3 @@ export class DofPointsMaterial extends THREE.ShaderMaterial {
     })
   }
 }
-

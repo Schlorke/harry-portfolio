@@ -14,7 +14,10 @@ interface WaveAnimationProps {
  * Componente de animação de ondas com partículas WebGL
  * Usado como background animado no header/loading screen
  */
-export const WaveAnimation = ({ hovering = false, className = '' }: WaveAnimationProps) => {
+export const WaveAnimation = ({
+  hovering = false,
+  className = ''
+}: WaveAnimationProps) => {
   // Valores otimizados para produção (sem Leva controls)
   const config = {
     speed: 1.0,

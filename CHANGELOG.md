@@ -27,6 +27,19 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - 🎨 **globals.css** - Novos estilos para `.header-background` e `.wave-animation`
 - 📝 **layout.tsx** - Removido preload do Background.png (não mais necessário)
 - 🔧 **page.tsx** - Integração com hook `usePageLoading`
+- ⏱️ **useScrollReveal** - Sincronizado com animação do header (delay de 2000ms após page-ready)
+- 🔄 **Reorganização de componentes:** Nova estrutura `components/ui/` e `components/feature/`
+  - `ProjectCard` movido para `components/ui/`
+  - `Header`, `Footer`, `FloatingActionButton` movidos para `components/feature/`
+- ♻️ **Refatoração do ProjectCard:** Lógica de vídeo extraída para hook `useVideoPlayer`
+  - Código do componente reduzido de ~176 para ~80 linhas
+  - Melhor separação de responsabilidades
+- 📦 Imports atualizados em `page.tsx` e `Projects.tsx` para usar barrel files
+
+### Fixed
+
+- 🐛 **Tela preta inicial** - CSS de loading agora só oculta `.main`, `footer` e FAB (header/wave sempre visíveis)
+- 🐛 **ScrollReveal timing** - Animações agora iniciam sincronizadas com fim da animação do header
 
 ### Technical
 
@@ -48,16 +61,6 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - 📝 Regra para atualizar `README.md` quando houver mudanças na estrutura do projeto
 - 🤖 Arquivo `.cursor/rules/harry-portfolio.mdc` - regras e contexto para IAs do Cursor IDE
 - ✨ Hook `useVideoPlayer` - encapsula lógica de reprodução de vídeo com suporte a desktop (hover) e mobile (scroll)
-
-### Changed
-
-- 🔄 **Reorganização de componentes:** Nova estrutura `components/ui/` e `components/feature/`
-  - `ProjectCard` movido para `components/ui/`
-  - `Header`, `Footer`, `FloatingActionButton` movidos para `components/feature/`
-- ♻️ **Refatoração do ProjectCard:** Lógica de vídeo extraída para hook `useVideoPlayer`
-  - Código do componente reduzido de ~176 para ~80 linhas
-  - Melhor separação de responsabilidades
-- 📦 Imports atualizados em `page.tsx` e `Projects.tsx` para usar barrel files
 
 ### Planned
 

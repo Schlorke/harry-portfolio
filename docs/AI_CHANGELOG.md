@@ -558,7 +558,7 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 **Estrutura:**
 
-```
+```text
 src/components/gl/
 ├── index.tsx              # Componente principal WaveAnimation
 ├── particles.tsx          # Lógica de partículas e animação
@@ -570,10 +570,10 @@ src/components/gl/
 
 **Props:**
 
-| Prop | Tipo | Padrão | Descrição |
-|------|------|--------|-----------|
-| `hovering` | `boolean` | `false` | Ativa efeito de introspect |
-| `className` | `string` | `''` | Classes CSS adicionais |
+| Prop        | Tipo      | Padrão  | Descrição                  |
+| ----------- | --------- | ------- | -------------------------- |
+| `hovering`  | `boolean` | `false` | Ativa efeito de introspect |
+| `className` | `string`  | `''`    | Classes CSS adicionais     |
 
 **Histórico de Alterações:**
 
@@ -622,17 +622,17 @@ src/components/gl/
 
 **Parâmetros:**
 
-| Opção | Tipo | Padrão | Descrição |
-|-------|------|--------|-----------|
+| Opção            | Tipo     | Padrão | Descrição                    |
+| ---------------- | -------- | ------ | ---------------------------- |
 | `minLoadingTime` | `number` | `2000` | Tempo mínimo de loading (ms) |
-| `maxLoadingTime` | `number` | `8000` | Timeout máximo (ms) |
+| `maxLoadingTime` | `number` | `8000` | Timeout máximo (ms)          |
 
 **Retorno:**
 
 ```typescript
 {
-  isLoading: boolean       // Se ainda está carregando
-  loadingProgress: number  // Progresso de 0-100
+  isLoading: boolean // Se ainda está carregando
+  loadingProgress: number // Progresso de 0-100
 }
 ```
 
@@ -669,6 +669,7 @@ src/components/gl/
 
 - Hook de efeito colateral (void return)
 - Inicializa ScrollReveal para elementos específicos
+- **Sincronizado com animação do header** (delay de 2000ms após page-ready)
 - SSR-safe com verificação de `window`
 - Cleanup implementado
 
@@ -677,6 +678,34 @@ src/components/gl/
 - `scrollreveal` biblioteca (import dinâmico)
 
 **Histórico de Alterações:**
+
+#### [2025-11-27] Sincronização com animação do header
+
+**Tipo:** `fix`
+**Arquivos:** `src/hooks/useScrollReveal.ts`
+**Contexto:** ScrollReveal estava iniciando antes da animação do header terminar
+
+**Detalhes:**
+
+- Adicionado listener para evento `page-ready`
+- Adicionado delay de 2000ms após page-ready antes de inicializar ScrollReveal
+- Isso faz o ScrollReveal iniciar ~500ms ANTES do header terminar de animar
+- Resultado: animações do conteúdo começam exatamente quando o header se recolhe
+
+**Timeline sincronizado:**
+
+- 0ms: page-ready dispara
+- 1500ms: header começa a animar
+- 2000ms: **ScrollReveal inicia** (500ms antes do header terminar)
+- 2500ms: header termina de animar
+- 2400ms+: animações do ScrollReveal aparecem
+
+**Notas para IAs futuras:**
+
+- Constante `SCROLL_REVEAL_DELAY = 2000` controla o timing
+- Ajustar se os timers do header mudarem
+- ScrollReveal não tem tipos oficiais TypeScript
+- Tipos são definidos inline no hook
 
 #### [2025-11-26] Criação do hook
 
@@ -692,8 +721,6 @@ src/components/gl/
 
 **Notas para IAs futuras:**
 
-- ScrollReveal não tem tipos oficiais TypeScript
-- Tipos são definidos inline no hook
 - Em Strict Mode do React, pode executar 2x em dev (normal)
 - Ver `docs/KNOWN_ISSUES.md` para comportamento em Strict Mode
 

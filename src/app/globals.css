@@ -104,6 +104,19 @@ body.page-ready .floating-action-button {
   visibility: visible;
 }
 
+/*========== SCROLL REVEAL - ELEMENTOS OCULTOS POR PADRÃO ==========*/
+/* Esconde elementos que serão animados pelo ScrollReveal para evitar flash de conteúdo */
+.perfil,
+.info,
+.skills,
+.about,
+.contact__form,
+.projects__card,
+.services__card,
+.experience__card {
+  visibility: hidden;
+}
+
 /*========== HEADER - ESTILOS PRINCIPAIS ==========*/
 header {
   position: fixed;
@@ -189,7 +202,9 @@ header .header-background {
   height: 100vh;
   z-index: -1;
   overflow: hidden;
-  transition: opacity 1s ease, transform 1s ease;
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
   pointer-events: none;
 }
 

@@ -1,5 +1,17 @@
 import { useEffect } from 'react'
 
+/**
+ * Delay antes de inicializar o ScrollReveal após o page-ready.
+ * Sincronizado com a animação do header:
+ * - Header começa a animar: 1500ms após page-ready
+ * - Transição CSS do header: 1000ms
+ * - Total da animação: ~2500ms
+ *
+ * Iniciamos o ScrollReveal ~500ms ANTES do header terminar,
+ * para que as animações estejam prontas quando o conteúdo aparecer.
+ */
+const SCROLL_REVEAL_DELAY = 2000 // 2000ms após page-ready
+
 export const useScrollReveal = () => {
   useEffect(() => {
     type ScrollRevealInstance = {
@@ -10,8 +22,9 @@ export const useScrollReveal = () => {
     type ScrollRevealFn = (options?: unknown) => ScrollRevealInstance
 
     let sr: ScrollRevealInstance | null = null
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
 
-    const init = async () => {
+    const initScrollReveal = async () => {
       if (typeof window === 'undefined') return
 
       const ScrollRevealLib = (await import('scrollreveal'))
@@ -32,9 +45,27 @@ export const useScrollReveal = () => {
       })
     }
 
-    init()
+    const handlePageReady = () => {
+      // Aguardar o delay sincronizado com a animação do header
+      timeoutId = setTimeout(() => {
+        initScrollReveal()
+      }, SCROLL_REVEAL_DELAY)
+    }
+
+    // Verificar se page-ready já aconteceu
+    if (typeof document !== 'undefined') {
+      if (document.body?.classList.contains('page-ready')) {
+        // Page já está ready, iniciar com delay
+        handlePageReady()
+      } else {
+        // Aguardar evento page-ready
+        window.addEventListener('page-ready', handlePageReady)
+      }
+    }
 
     return () => {
+      if (timeoutId) clearTimeout(timeoutId)
+      window.removeEventListener('page-ready', handlePageReady)
       sr?.destroy()
     }
   }, [])

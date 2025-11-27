@@ -2,7 +2,12 @@ import * as THREE from 'three'
 import { periodicNoiseGLSL } from './utils'
 
 // Function to generate equally distributed points on a plane
-function getPlane(count: number, components: number, size: number = 512, scale: number = 1.0) {
+function getPlane(
+  count: number,
+  components: number,
+  size: number = 512,
+  scale: number = 1.0
+) {
   const length = count * components
   const data = new Float32Array(length)
 
@@ -24,6 +29,15 @@ function getPlane(count: number, components: number, size: number = 512, scale: 
 }
 
 export class SimulationMaterial extends THREE.ShaderMaterial {
+  declare uniforms: {
+    positions: { value: THREE.Texture }
+    uTime: { value: number }
+    uNoiseScale: { value: number }
+    uNoiseIntensity: { value: number }
+    uTimeScale: { value: number }
+    uLoopPeriod: { value: number }
+  }
+
   constructor(scale: number = 10.0) {
     const positionsTexture = new THREE.DataTexture(
       getPlane(512 * 512, 4, 512, scale),
@@ -82,4 +96,3 @@ export class SimulationMaterial extends THREE.ShaderMaterial {
     })
   }
 }
-
