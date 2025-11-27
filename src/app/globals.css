@@ -89,12 +89,17 @@ body {
   overflow-x: hidden; /* evita corte lateral em telas estreitas */
 }
 
-body.page-loading {
+/* Durante loading: apenas o conteúdo principal fica oculto, header/wave animation sempre visível */
+body.page-loading .main,
+body.page-loading footer,
+body.page-loading .floating-action-button {
   opacity: 0;
   visibility: hidden;
 }
 
-body.page-ready {
+body.page-ready .main,
+body.page-ready footer,
+body.page-ready .floating-action-button {
   opacity: 1;
   visibility: visible;
 }
