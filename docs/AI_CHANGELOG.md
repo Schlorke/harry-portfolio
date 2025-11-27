@@ -972,6 +972,41 @@ src/components/gl/
 
 ---
 
+### next.config.mjs
+
+**Arquivo:** `next.config.mjs`
+
+**Estado Atual:**
+
+- Configuração do Next.js 16
+- Headers de segurança e performance
+- Cache agressivo para assets estáticos
+- Cache revalidável para páginas HTML
+- Configuração webpack para Three.js
+
+**Histórico de Alterações:**
+
+#### [2025-12-XX] Headers de cache para páginas HTML
+
+**Tipo:** `fix`
+**Arquivos:** `next.config.mjs`
+**Contexto:** Resolver problemas de cache após transferência de domínio (Hostinger → Vercel)
+**Detalhes:**
+
+- Adicionado header `Cache-Control: public, max-age=0, must-revalidate` para todas as rotas (`/:path*`)
+- Adicionado header específico para página inicial (`/`)
+- Páginas HTML agora podem ser revalidadas imediatamente, enquanto assets estáticos mantêm cache longo
+- Isso ajuda a resolver problemas onde usuários veem versão antiga após mudanças de DNS
+
+**Notas para IAs futuras:**
+
+- Assets estáticos (`/assets/:path*`, `/_next/static/:path*`) mantêm cache de 1 ano (imutáveis)
+- Páginas HTML (`/:path*`) têm cache de 0 segundos com `must-revalidate` (sempre verificam servidor)
+- Se precisar invalidar cache de assets, considere versionamento ou query strings
+- Para problemas de cache DNS, ver `docs/1_HOW_TO_GUIDES/3_troubleshooting.md`
+
+---
+
 ### layout.tsx
 
 **Arquivo:** `src/app/layout.tsx`
@@ -1155,3 +1190,25 @@ src/components/gl/
 ---
 
 **Última atualização:** 27 de Novembro de 2025
+
+### [2025-12-XX] Atualização do guia de troubleshooting - Cache DNS e IPv6
+
+**Tipo:** `docs`
+**Arquivos:** `docs/1_HOW_TO_GUIDES/3_troubleshooting.md`
+**Contexto:** Resolver problema de cache DNS após transferência de domínio (Hostinger → Vercel)
+**Detalhes:**
+
+- Adicionada seção completa sobre problemas de cache DNS após transferência de domínio
+- Instruções detalhadas para limpar cache DNS em Windows, macOS e Linux
+- Guia para interpretar resultados do `nslookup` e identificar problemas
+- Instruções passo a passo para usar DNS públicos (Google, Cloudflare)
+- Solução para problema comum: Windows usando DNS IPv6 do provedor
+- Instruções para desabilitar IPv6 temporariamente ou configurar DNS IPv6
+- Checklist completo para diagnóstico de problemas de propagação DNS
+
+**Notas para IAs futuras:**
+
+- Problema comum: Windows pode usar DNS IPv6 do provedor mesmo com DNS IPv4 configurado
+- Solução: Desabilitar IPv6 temporariamente ou configurar DNS IPv6 também
+- DNS público (Cloudflare `1.1.1.1`) é mais confiável que DNS do provedor para resolver problemas de cache
+- Sempre verificar com `nslookup -type=A dominio.com 1.1.1.1` para testar DNS IPv4 especificamente

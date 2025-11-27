@@ -257,6 +257,237 @@ pnpm dev
 
 ---
 
+### Site mostra versão antiga após transferência de domínio (Cache DNS)
+
+**Causa:** Após transferir um domínio de um servidor para outro (ex: Hostinger → Vercel),
+o cache DNS e do navegador pode manter a versão antiga.
+
+**Sintomas:**
+
+- Site mostra versão antiga em um dispositivo, mas versão nova em outro
+- Acessando pelo celular funciona, mas no computador não
+- DNS ainda apontando para o IP antigo
+
+**Soluções (em ordem de prioridade):**
+
+#### 1. Limpar Cache DNS do Sistema Operacional
+
+**Windows:**
+
+```powershell
+# Abrir PowerShell como Administrador
+ipconfig /flushdns
+```
+
+**macOS:**
+
+```bash
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+```
+
+**Linux:**
+
+```bash
+sudo systemd-resolve --flush-caches
+# ou
+sudo service network-manager restart
+```
+
+#### 2. Limpar Cache do Navegador
+
+**Chrome/Edge:**
+
+- `Ctrl + Shift + Delete` → Marcar "Imagens e arquivos em cache" → Limpar
+- Ou `Ctrl + Shift + R` (hard refresh)
+- Ou DevTools (F12) → Network → Marcar "Disable cache"
+
+**Firefox:**
+
+- `Ctrl + Shift + Delete` → Marcar "Cache" → Limpar
+- Ou `Ctrl + F5` (hard refresh)
+
+#### 3. Verificar Propagação DNS
+
+Use ferramentas online para verificar se o DNS já propagou:
+
+- [DNS Checker](https://dnschecker.org/) - Verifica propagação global
+- [WhatsMyDNS](https://www.whatsmydns.net/) - Verifica DNS em múltiplos locais
+
+**Comando no terminal:**
+
+```powershell
+# Windows PowerShell
+nslookup harryschlorke.com
+```
+
+**Como interpretar o resultado:**
+
+**✅ Correto (DNS propagado):**
+
+```text
+Nome:    harryschlorke.com
+Addresses:  216.198.79.1
+```
+
+Ou qualquer IP da Vercel (não `212.85.6.183`)
+
+**❌ Problema (DNS ainda não propagou):**
+
+```text
+Nome:    harryschlorke.com
+Addresses:  212.85.6.183
+```
+
+Este é o IP antigo da Hostinger. Significa que o DNS do seu provedor ainda está em cache.
+
+**O que verificar:**
+
+- Se o IP retornado é da Vercel (não da Hostinger)
+- Se os nameservers estão corretos (ex: `ns1.vercel-dns.com`, `ns2.vercel-dns.com`)
+- Se o registro A ou ALIAS aponta para o IP correto da Vercel
+
+**Nota:** Se você vê o IP antigo (`212.85.6.183`), use DNS público (passo 6) para contornar o cache do seu provedor.
+
+#### 4. Aguardar Propagação DNS
+
+A propagação DNS pode levar de **alguns minutos até 48 horas**, dependendo do TTL
+(Time To Live) configurado.
+
+**TTL típicos:**
+
+- 60 segundos (rápido, mas mais requisições DNS)
+- 3600 segundos (1 hora, balanceado)
+- 86400 segundos (24 horas, comum)
+
+**Dica:** Se você acabou de transferir o domínio, aguarde algumas horas antes de se preocupar.
+
+#### 5. Verificar Configuração na Vercel
+
+1. Acesse o dashboard da Vercel
+2. Vá em **Settings** → **Domains**
+3. Verifique se o domínio está configurado corretamente
+4. Verifique se o projeto está deployado e ativo
+
+##### ⚠️ IMPORTANTE: Verificar Registros DNS Conflitantes
+
+Se você copiou registros DNS da Hostinger para a Vercel, pode haver conflitos:
+
+1. **Na Vercel, vá em Settings → Domains → DNS**
+2. **Verifique se há algum registro A apontando para IP da Hostinger:**
+   - ❌ **REMOVER:** Qualquer registro A com valor `212.85.6.183` ou outro IP da Hostinger
+   - ✅ **MANTER:** Apenas registros ALIAS/CNAME gerenciados pela Vercel
+3. **Verifique registros duplicados:**
+   - Não deve haver múltiplos registros A ou ALIAS para o domínio raiz
+   - A Vercel geralmente cria automaticamente um ALIAS record
+4. **Registros de email (se ainda usar Hostinger para email):**
+   - ✅ **MANTER:** MX records apontando para `mx1.hostinger.com` e `mx2.hostinger.com`
+   - ✅ **MANTER:** TXT records (SPF, DMARC) relacionados a email
+   - ❌ **REMOVER:** Qualquer registro A ou CNAME que aponte para IP/servidor da Hostinger
+
+**Registros corretos na Vercel devem ser:**
+
+- ALIAS record (domínio raiz) → Gerenciado automaticamente pela Vercel
+- CNAME `www` → `cname.vercel-dns.com.` ou similar
+- Registros de email (se necessário): MX, TXT (SPF, DMARC), CNAME (DKIM)
+
+#### 6. Usar DNS Público (Solução Rápida)
+
+Se o `nslookup` ainda mostra o IP antigo (ex: `212.85.6.183` da Hostinger),
+seu provedor de internet ainda está usando cache antigo.
+
+##### Solução: Alterar DNS do Windows temporariamente
+
+1. Abrir Configurações de Rede:
+   - `Win + R` → Digite `ncpa.cpl` → Enter
+   - Ou: Configurações → Rede e Internet → Status → Alterar opções do adaptador
+
+2. **Alterar DNS:**
+   - Clique com botão direito na sua conexão ativa (Wi-Fi ou Ethernet)
+   - Propriedades → Protocolo IP Versão 4 (TCP/IPv4) → Propriedades
+   - Marque "Usar os seguintes endereços de servidor DNS"
+   - DNS preferencial: `8.8.8.8` (Google)
+   - DNS alternativo: `1.1.1.1` (Cloudflare)
+   - OK → Fechar
+
+3. **Limpar cache novamente:**
+
+   ```powershell
+   ipconfig /flushdns
+   ```
+
+4. **Testar novamente:**
+
+   ```powershell
+   nslookup harryschlorke.com
+   ```
+
+   Agora deve mostrar o IP da Vercel (`216.198.79.1` ou similar)
+
+5. **Reverter depois (opcional):**
+   - Volte para "Obter endereço do servidor DNS automaticamente" quando o DNS propagar
+
+**DNS públicos recomendados:**
+
+- Google: `8.8.8.8` e `8.8.4.4`
+- Cloudflare: `1.1.1.1` e `1.0.0.1` (recomendado - mais rápido e privado)
+- Quad9: `9.9.9.9` e `149.112.112.112`
+
+##### ⚠️ Problema comum: Windows usando DNS IPv6 do provedor
+
+Se após configurar DNS público o `nslookup` ainda mostra IP antigo:
+
+1. Verifique se está usando IPv6:
+
+   ```powershell
+   nslookup -type=A harryschlorke.com 1.1.1.1
+   ```
+
+   Se este comando retorna IP correto, o problema é IPv6.
+
+2. Solução: Desabilitar IPv6 temporariamente:
+   - Propriedades da conexão → Desmarque "Protocolo IP Versão 6 (TCP/IPv6)"
+   - Reinicie a conexão (Desabilitar → Habilitar)
+   - Teste novamente: `nslookup harryschlorke.com`
+
+3. Alternativa: Configurar DNS IPv6 também:
+   - Propriedades da conexão → Protocolo IP Versão 6 (TCP/IPv6) → Propriedades
+   - DNS preferencial: `2606:4700:4700::1111` (Cloudflare IPv6)
+   - DNS alternativo: `2606:4700:4700::1001` (Cloudflare IPv6 secundário)
+
+#### 7. Limpar Cache do ISP (Provedor de Internet)
+
+Se nada funcionar, pode ser cache do seu provedor de internet:
+
+- Reiniciar o roteador/modem
+- Aguardar algumas horas para o cache expirar (TTL de 60 segundos ajuda)
+
+#### 8. Testar em Modo Anônimo/Privado
+
+Abra o site em uma janela anônima/privada para verificar se é cache do navegador:
+
+- Chrome/Edge: `Ctrl + Shift + N`
+- Firefox: `Ctrl + Shift + P`
+
+**Se funcionar em modo anônimo:** É cache do navegador → Limpar cache (passo 2)
+
+**Se não funcionar:** É cache DNS → Seguir passos 1, 3 e 4
+
+---
+
+### Checklist para Problemas de Cache DNS
+
+- [ ] Limpei o cache DNS do sistema operacional
+- [ ] Limpei o cache do navegador
+- [ ] Verifiquei a propagação DNS com ferramentas online
+- [ ] Verifiquei os nameservers na Vercel
+- [ ] Testei em modo anônimo/privado
+- [ ] Aguardei pelo menos 1 hora após a transferência
+- [ ] Reiniciei o roteador/modem
+- [ ] Verifiquei se o projeto está deployado na Vercel
+
+---
+
 ## 🔵 Erros de Next.js
 
 ### "Error: Image with src 'X' must use 'width' and 'height' properties..."

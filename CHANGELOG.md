@@ -9,6 +9,15 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- 📚 **Guia de Troubleshooting - Cache DNS** - Nova seção em `docs/1_HOW_TO_GUIDES/3_troubleshooting.md`
+  - Soluções para problemas de cache DNS após transferência de domínio
+  - Instruções para limpar cache DNS em Windows, macOS e Linux
+  - Guia detalhado para interpretar resultados do `nslookup`
+  - Instruções passo a passo para usar DNS públicos (Google, Cloudflare)
+  - Solução para problema comum: Windows usando DNS IPv6 do provedor
+  - Instruções para desabilitar IPv6 ou configurar DNS IPv6
+  - Checklist completo para diagnóstico de problemas de propagação DNS
+
 - ✨ **Wave Animation Background** - Substituição do background estático por animação WebGL de partículas
   - Novo componente `WaveAnimation` em `src/components/gl/`
   - Animação de ondas com partículas brancas usando Three.js e @react-three/fiber
