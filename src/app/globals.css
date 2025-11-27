@@ -22,6 +22,9 @@
   --text-color: hsl(var(--hue), 2%, 66%);
   --body-color: hsl(var(--hue), 100%, 1%);
   --container-color: hsl(var(--hue), 2%, 10%);
+  --layout-max-width: 1168px;
+  --layout-inline-padding: 1.5rem;
+  --header-align-offset: 1.75rem;
   --conic-gradient: conic-gradient(
     from 150deg at 50% 45%,
     hsl(var(--hue), 80%, 20%) 0deg,
@@ -48,6 +51,45 @@
   /*========== z index ==========*/
   --z-tooltip: 10;
   --z-fixed: 100;
+}
+
+:root {
+  --layout-inline-start: max(
+    var(--layout-inline-padding),
+    calc((100vw - var(--layout-max-width)) / 2 + var(--layout-inline-padding))
+  );
+  --layout-inline-end: var(--layout-inline-start);
+  --header-track-width: calc(100vw - 2 * var(--layout-inline-padding));
+  --header-align-start: calc((100vw - var(--header-track-width)) / 2);
+  --header-align-end: calc(
+    var(--header-align-start) + var(--header-track-width)
+  );
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --header-track-width: min(
+      724px,
+      calc(100vw - 2 * var(--layout-inline-padding))
+    );
+    --header-align-start: calc((100vw - var(--header-track-width)) / 2);
+    --header-align-end: calc(
+      var(--header-align-start) + var(--header-track-width)
+    );
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  :root {
+    --header-track-width: min(
+      1120px,
+      calc(100vw - 2 * var(--layout-inline-padding))
+    );
+    --header-align-start: calc((100vw - var(--header-track-width)) / 2);
+    --header-align-end: calc(
+      var(--header-align-start) + var(--header-track-width)
+    );
+  }
 }
 
 /*========== Responsive typography ==========*/
@@ -177,9 +219,9 @@ header .logo {
 /* Logo após animação */
 header.animate_header .logo {
   position: absolute;
-  left: 40px; /* Posiciona à esquerda após animação */
   top: 10px;
-  transform: translateY(0) translateX(0);
+  left: 50%;
+  transform: translate(-50%, 0);
   line-height: 80px; /* Altura do header após animação */
 }
 
@@ -285,6 +327,41 @@ header nav ul li a {
 header nav ul li a:hover {
   background: #fff;
   color: #262626;
+}
+
+@media (min-width: 785px) {
+  header.animate_header .logo {
+    left: max(
+      0px,
+      calc(var(--header-align-start) - var(--header-align-offset))
+    );
+    transform: translateY(0);
+  }
+
+  header nav {
+    left: max(
+      0px,
+      calc(var(--header-align-start) - var(--header-align-offset))
+    );
+    right: max(
+      0px,
+      calc((100vw - var(--header-align-end)) - var(--header-align-offset))
+    );
+    margin-right: 0;
+    transform: none;
+    width: auto;
+    padding-inline: 0;
+    justify-content: flex-end;
+    top: 0;
+    height: 80px;
+    align-items: center;
+  }
+
+  header nav ul {
+    justify-content: flex-end;
+    gap: 1rem;
+    width: 100%;
+  }
 }
 
 /*========== BOTÃO HAMBÚRGUER ==========*/
@@ -474,9 +551,9 @@ video {
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
   width: 100%;
-  max-width: 1168px;
+  max-width: var(--layout-max-width);
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: var(--layout-inline-padding);
 }
 
 .grid {

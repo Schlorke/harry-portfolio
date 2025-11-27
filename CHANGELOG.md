@@ -25,6 +25,10 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - 🔄 **Header.tsx** - Background substituído de imagem estática para animação WebGL
 - ⚙️ **next.config.mjs** - Adicionada configuração webpack para Three.js
 - 🎨 **globals.css** - Novos estilos para `.header-background` e `.wave-animation`
+- 🎯 **globals.css** - Header reduzido com logo e navegação alinhados
+  simetricamente às margens do conteúdo central usando variáveis reutilizáveis
+  e ajuste fino responsivo
+- 📱 **globals.css** - Breakpoint mobile restaurado para manter a posição original da logo durante a animação
 - 📝 **layout.tsx** - Removido preload do Background.png (não mais necessário)
 - 🔧 **page.tsx** - Integração com hook `usePageLoading`
 - ⏱️ **useScrollReveal** - Sincronizado com animação do header (delay de 2000ms após page-ready)

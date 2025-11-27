@@ -1100,6 +1100,32 @@ src/components/gl/
 - Tailwind usa prefixo `tw-` para evitar conflitos
 - Ver `docs/2_REFERENCE/5_design-system.md` para detalhes
 
+#### [2025-11-27] Header/nav alinhados às margens do conteúdo
+
+**Tipo:** `style`
+**Arquivos:** `src/app/globals.css`
+**Contexto:** Garantir que logo e navegação compartilhem as mesmas margens do conteúdo principal (container de 1168px)
+**Detalhes:**
+
+- Criadas variáveis `--layout-max-width`, `--layout-inline-padding` e
+  `--layout-inline-start` para reutilizar as margens do container
+- `.container` agora consome as novas variáveis, garantindo consistência global
+- Logo e navegação (desktop) usam as novas variáveis e um ajuste fino
+  (`--header-align-offset`) para iniciar/terminar exatamente nas mesmas
+  linhas-guia do conteúdo, tanto na margem esquerda quanto na direita
+  (`--header-align-end`)
+- Navegação permanece absoluta (para não quebrar animações) mas ocupa toda a
+  largura útil, com itens alinhados à borda direita do container virtual
+- Breakpoint mobile restaurado para o comportamento anterior (logo deslocada à
+  esquerda para manter coerência com o layout compacto)
+
+**Notas para IAs futuras:**
+
+- Prefira ajustar offsets com `--layout-inline-start` ao invés de mexer em
+  `position`
+- Para novos componentes que precisem seguir o mesmo alinhamento, reutilize as
+  variáveis globais ou ajuste `--header-align-offset` caso o design mude
+
 ---
 
 ## 📊 Estatísticas
