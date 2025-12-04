@@ -1222,6 +1222,30 @@ src/components/gl/
 
 **Última atualização:** 27 de Novembro de 2025
 
+### [2025-11-27] Criação do guia de diagnóstico DNS Vercel
+
+**Tipo:** `docs`
+**Arquivos:** `docs/1_HOW_TO_GUIDES/4_diagnostico-dns-vercel.md`
+**Contexto:** Resolver problema específico onde domínio não está acessível mesmo com deployment funcionando na Vercel
+**Detalhes:**
+
+- Guia completo de diagnóstico passo a passo para problemas de DNS
+- Identificação do problema mais comum: conflito entre registros ALIAS (gerenciados pela Vercel) e registros A manuais
+- Soluções específicas para remover registros A conflitantes
+- Guia para verificar propagação DNS com ferramentas online
+- Instruções para testar resolução DNS localmente
+- Soluções para problemas de IPv6 vs IPv4
+- Checklist completo de diagnóstico
+- Soluções específicas para ERR_CONNECTION_TIMED_OUT e ERR_NAME_NOT_RESOLVED
+
+**Notas para IAs futuras:**
+
+- Problema mais comum: registro A manual conflitando com ALIAS gerenciado pela Vercel
+- A Vercel gerencia automaticamente registros ALIAS - não adicionar registros A manuais
+- Sempre verificar se há registros A manuais na lista de DNS Records
+- Registros bloqueados (lock icon) são gerenciados pela Vercel - não remover
+- Propagação DNS pode levar até 48 horas após alterações
+
 ### [2025-12-XX] Atualização do guia de troubleshooting - Cache DNS e IPv6
 
 **Tipo:** `docs`

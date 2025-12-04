@@ -9,6 +9,12 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- 📚 **Guia de Diagnóstico DNS Vercel** - Novo guia completo em `docs/1_HOW_TO_GUIDES/4_diagnostico-dns-vercel.md`
+  - Diagnóstico passo a passo para problemas de DNS quando domínio não está acessível
+  - Soluções para conflitos entre registros ALIAS e A
+  - Guia para verificar propagação DNS
+  - Checklist completo de diagnóstico
+  - Soluções específicas para ERR_CONNECTION_TIMED_OUT e ERR_NAME_NOT_RESOLVED
 - 📚 **Guia de Troubleshooting - Cache DNS** - Nova seção em `docs/1_HOW_TO_GUIDES/3_troubleshooting.md`
   - Soluções para problemas de cache DNS após transferência de domínio
   - Instruções para limpar cache DNS em Windows, macOS e Linux
