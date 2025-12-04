@@ -48,12 +48,30 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
   - Código do componente reduzido de ~176 para ~80 linhas
   - Melhor separação de responsabilidades
 - 📦 Imports atualizados em `page.tsx` e `Projects.tsx` para usar barrel files
+- 📦 **Atualização de dependências** - Atualização de pacotes para versões mais recentes
+  - `@eslint/eslintrc`: `3.3.1` → `3.3.3`
+  - `@react-three/fiber`: `9.4.0` → `9.4.2`
+  - `@typescript-eslint/eslint-plugin`: `8.48.0` → `8.48.1`
+  - `@typescript-eslint/parser`: `8.48.0` → `8.48.1`
+  - `typescript-eslint`: `8.48.0` → `8.48.1`
+  - `cspell`: `9.3.2` → `9.4.0`
+  - `prettier`: `3.5.3` → `3.7.4`
 
 ### Fixed
 
 - 🐛 **Tela preta inicial** - CSS de loading agora só oculta `.main`, `footer` e FAB (header/wave sempre visíveis)
 - 🐛 **ScrollReveal timing** - Animações agora iniciam sincronizadas com fim da animação do header
 - 🐛 Logo deixa de flutuar ao redimensionar; transicoes da logo sao desligadas apos a animacao inicial do header
+
+### Security
+
+- 🔒 **Correção CVE-2025-55182** - Atualização de dependências para corrigir vulnerabilidade crítica em React Server Components
+  - `next`: `16.0.4` → `16.0.7`
+  - `react`: `19.2.0` → `19.2.1`
+  - `react-dom`: `19.2.0` → `19.2.1`
+  - `eslint-config-next`: `16.0.4` → `16.0.7`
+  - Vulnerabilidade permitia possível execução remota de código em condições específicas
+  - Vercel WAF já protege automaticamente, mas atualização é recomendada
 
 ### Technical
 
