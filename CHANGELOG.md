@@ -70,8 +70,10 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
   - `react`: `19.2.0` → `19.2.1`
   - `react-dom`: `19.2.0` → `19.2.1`
   - `eslint-config-next`: `16.0.4` → `16.0.7`
-  - Vulnerabilidade permitia possível execução remota de código em condições específicas
-  - Vercel WAF já protege automaticamente, mas atualização é recomendada
+  - Vulnerabilidade permitia possível execução remota de código (RCE) em condições específicas
+  - CVSS Score: 10.0 (Crítico)
+  - Vercel WAF já protege automaticamente, mas atualização é obrigatória para deploy
+  - Referências: CVE-2025-55182 (React), CVE-2025-66478 (Next.js)
 
 ### Technical
 

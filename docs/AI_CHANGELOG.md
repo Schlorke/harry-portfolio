@@ -114,8 +114,8 @@ Após fazer alterações, adicione uma nova entrada na seção do componente mod
 
 **Tipo:** `fix`
 **Arquivos:** `src/components/feature/Header.tsx`, `src/app/globals.css`
-**Contexto:** A logo deslizava durante o resize porque as transicoes de `left/transform` continuavam ativas apos a
-animacao inicial.
+**Contexto:**
+A logo deslizava durante o resize porque as transicoes de `left/transform` continuavam ativas apos a animação inicial.
 **Detalhes:**
 
 - Adicionado estado `isHeaderStable` para aplicar a classe `header-stable` quando a animacao termina
@@ -1021,69 +1021,6 @@ src/components/gl/
 - Páginas HTML (`/:path*`) têm cache de 0 segundos com `must-revalidate` (sempre verificam servidor)
 - Se precisar invalidar cache de assets, considere versionamento ou query strings
 - Para problemas de cache DNS, ver `docs/1_HOW_TO_GUIDES/3_troubleshooting.md`
-
----
-
-### package.json
-
-**Arquivo:** `package.json`
-
-**Estado Atual:**
-
-- Dependências atualizadas para versões corrigidas de segurança
-- Next.js 16.0.7 (corrigido CVE-2025-55182)
-- React 19.2.1 (corrigido CVE-2025-55182)
-- React DOM 19.2.1 (corrigido CVE-2025-55182)
-- ESLint Config Next 16.0.7 (atualizado para compatibilidade)
-- Dependências de desenvolvimento atualizadas para versões mais recentes
-
-**Histórico de Alterações:**
-
-#### [2025-12-03] Atualização de dependências de desenvolvimento
-
-**Tipo:** `chore`
-**Arquivos:** `package.json`
-**Contexto:** Atualização de pacotes desatualizados para versões mais recentes (melhorias, correções de bugs, novas funcionalidades)
-
-**Detalhes:**
-
-- Atualizado `@eslint/eslintrc`: `^3.3.1` → `^3.3.3`
-- Atualizado `@react-three/fiber`: `^9.4.0` → `^9.4.2`
-- Atualizado `@typescript-eslint/eslint-plugin`: `^8.48.0` → `^8.48.1`
-- Atualizado `@typescript-eslint/parser`: `^8.48.0` → `^8.48.1`
-- Atualizado `typescript-eslint`: `^8.48.0` → `^8.48.1`
-- Atualizado `cspell`: `^9.3.2` → `^9.4.0`
-- Atualizado `prettier`: `^3.5.3` → `^3.7.4`
-
-**Notas para IAs futuras:**
-
-- Atualizações de patch/minor geralmente são seguras e recomendadas
-- Sempre executar `pnpm type-check` após atualizar dependências
-- Verificar se há breaking changes em atualizações major (MAJOR.MINOR.PATCH)
-
-#### [2025-12-03] Correção de vulnerabilidade crítica CVE-2025-55182
-
-**Tipo:** `security`
-**Arquivos:** `package.json`
-**Contexto:** Vulnerabilidade crítica em React Server Components que permitia possível execução remota de código (RCE) em condições específicas. Vercel bloqueou o deploy devido à vulnerabilidade.
-
-**Detalhes:**
-
-- Atualizado `next`: `^16.0.4` → `^16.0.7` (versão corrigida)
-- Atualizado `react`: `^19.2.0` → `^19.2.1` (versão corrigida)
-- Atualizado `react-dom`: `^19.2.0` → `^19.2.1` (versão corrigida)
-- Atualizado `eslint-config-next`: `^16.0.4` → `^16.0.7` (compatibilidade)
-- Vulnerabilidade afetava React 19.0, 19.1.0, 19.1.1, e 19.2.0
-- Versões corrigidas: React 19.0.1, 19.1.2, 19.2.1 e Next.js 16.0.7
-- Vercel WAF já protege automaticamente, mas atualização é obrigatória para deploy
-
-**Notas para IAs futuras:**
-
-- **SEMPRE manter dependências atualizadas** para versões corrigidas de segurança
-- Verificar avisos de segurança da Vercel no dashboard antes de fazer deploy
-- Para vulnerabilidades críticas, atualizar imediatamente sem esperar aprovação
-- Referência: [CVE-2025-55182](https://vercel.com/security/cve-2025-55182)
-- Após atualizar dependências, sempre executar `pnpm install` e `pnpm type-check`
 
 ---
 
